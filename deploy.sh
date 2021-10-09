@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+﻿#!/usr/bin/env sh
 
 # ����������ʱ��ֹ�ű�
 
@@ -19,6 +19,8 @@ git add -A
 git commit -m 'deploy'
 
 # ���� https://qqqiuqihang.github.io
-git push -f git@github.com:qqqiuqihang.git gh-pages:gh-pages
+git remote add origin git@gitee.com:qqqiuqihang/qqqiuqihang.github.io.git
+
+git push -u origin master:gh-pages --force
 
 cd -

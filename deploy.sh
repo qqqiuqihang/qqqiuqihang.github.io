@@ -1,24 +1,16 @@
 #!/usr/bin/env sh
 
-
-
-# µ±·¢Éú´íÎóÊ±ÖÐÖ¹½Å±¾
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ö¹ï¿½Å±ï¿½
 
 set -e
 
-
-
-# ¹¹½¨
+# ï¿½ï¿½ï¿½ï¿½
 
 npm run build
 
-
-
-# cd µ½¹¹½¨Êä³öµÄÄ¿Â¼ÏÂ 
+# cd ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ 
 
 cd dist
-
-
 
 git init
 
@@ -26,11 +18,7 @@ git add -A
 
 git commit -m 'deploy'
 
-
-
-# ²¿Êðµ½ https://qqqiuqihang.github.io
+# ï¿½ï¿½ï¿½ï¿½ https://qqqiuqihang.github.io
 git push -f git@github.com:qqqiuqihang.git gh-pages:gh-pages
-
-
 
 cd -

@@ -1,5 +1,7 @@
 <template>
-  <div class="home" ref="home"></div>
+  <div class="home" ref="home">
+    <div class="box_shadow">dfsss</div>
+  </div>
 </template>
 
 <script>
@@ -31,18 +33,18 @@ export default {
       this.$refs.home.appendChild(p);
     },
   },
-  setup() {
-    // let title = " I am loser, but I never lost hope. Therefore, I have been working silently. ";
-    // let arrList = title.split("");
-  },
+  setup() {},
 };
 </script>
 
 <style lang="less" scoped>
 .home {
+  position: relative;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
+  background: url("~@/assets/images/homeBackGround.jpeg") no-repeat center;
+  background-size: cover;
   /deep/ .title {
     display: flex;
     flex-wrap: wrap;
@@ -57,6 +59,16 @@ export default {
       animation: scorllTextShow 0.8s ease-out both;
     }
   }
+}
+
+.box_shadow {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 100px;
+  height: 200px;
+  background-color: #fff;
+  transform: translateY(-50%) rotateZ(-30deg);
 }
 
 @keyframes scorllTextShow {

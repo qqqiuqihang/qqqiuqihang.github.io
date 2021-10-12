@@ -1,6 +1,11 @@
 <template>
   <div class="home" ref="home">
-    <div class="box_shadow">dfsss</div>
+    <div class="box_shadow">
+      <p>个人主页</p>
+      <p>文章</p>
+      <p>后台管理</p>
+      <p>数据可视化</p>
+    </div>
   </div>
 </template>
 
@@ -62,13 +67,119 @@ export default {
 }
 
 .box_shadow {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 50%;
-  right: 10%;
+  right: 20%;
   width: 100px;
-  height: 200px;
-  background-color: #fff;
-  transform: translateY(-50%) rotateZ(-30deg);
+  height: 80%;
+  // background-color: #eee;
+  background: linear-gradient(
+    to right,
+    #cd93ff,
+    #70e2ff,
+    #9fff5b,
+    #ffe83f,
+    #ffa647,
+    #ff75c3
+  );
+  transform: translateY(-50%) rotateZ(-30deg) skewY(0deg);
+  box-shadow: -20px 20px 0 rgb(255, 255, 255, 1);
+  text-align: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 100%;
+    // background-color: #eee;
+    background: linear-gradient(
+      to right,
+      #cd93ff,
+      #70e2ff,
+      #9fff5b,
+      #ffe83f,
+      #ffa647,
+      #ff75c3
+    );
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    transform: translateY(10px) skewY(-45deg);
+    box-sizing: border-box;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    // background-color: #eee;
+    background: linear-gradient(
+      to right,
+      #cd93ff,
+      #70e2ff,
+      #9fff5b,
+      #ffe83f,
+      #ffa647,
+      #ff75c3
+    );
+    border-top: 1px solid #ddd;
+    transform: translateX(-10px) skewX(-45deg);
+    box-sizing: border-box;
+  }
+  p {
+    position: relative;
+    flex: 1;
+    max-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    user-select: none;
+    cursor: pointer;
+    &:hover {
+      background-color: #409eff;
+      color: white;
+      &::before {
+        background: none;
+        background-color: #409eff;
+        color: white;
+      }
+    }
+    &:active {
+      background-color: yellowgreen;
+      &::before {
+        background-color: yellowgreen;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -20px;
+      width: 20px;
+      height: 100%;
+      // background-color: #eee;
+      background: linear-gradient(
+        to right,
+        #cd93ff,
+        #70e2ff,
+        #9fff5b,
+        #ffe83f,
+        #ffa647,
+        #ff75c3
+      );
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      transform: translateY(10px) skewY(-45deg);
+      box-sizing: border-box;
+    }
+  }
 }
 
 @keyframes scorllTextShow {

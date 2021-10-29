@@ -1,10 +1,9 @@
 <template>
   <div class="home" ref="home">
     <div class="box_shadow">
-      <p>个人主页</p>
-      <p>文章</p>
-      <p>后台管理</p>
-      <p>数据可视化</p>
+      <p v-for="(item, index) in btnToGo" :key="index" @click="togo(item)">
+        {{ item.title }}
+      </p>
     </div>
   </div>
 </template>
@@ -16,6 +15,28 @@ export default {
   components: {},
   data() {
     return {
+      btnToGo: [
+        {
+          title: "个人主页",
+          path: "my",
+          name: "My",
+        },
+        {
+          title: "文章",
+          path: "title",
+          name: "Title",
+        },
+        {
+          title: "后台管理",
+          path: "admin",
+          name: "Admin",
+        },
+        {
+          title: "数据可视化",
+          path: "data",
+          name: "Data",
+        },
+      ],
       title:
         " I am loser, but I never lost hope. Therefore, I have been working silently. ",
     };
@@ -36,6 +57,15 @@ export default {
         p.appendChild(span);
       });
       this.$refs.home.appendChild(p);
+    },
+    // 跳转
+    togo(item) {
+      console.log(item.path);
+      if (item.path === "my" || item.path === "admin") {
+        this.$router.push(item.name);
+      } else {
+        this.$message.info("功能开发中！！！");
+      }
     },
   },
   setup() {},

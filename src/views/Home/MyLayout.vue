@@ -7,7 +7,9 @@
       <el-aside width="200px">
         <MyAside></MyAside>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view />
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -16,7 +18,7 @@
 import MyHeader from "@/components/Header.vue";
 import MyAside from "@/components/Aside.vue";
 export default {
-  name: "layout",
+  name: "MyLayout",
   data() {
     return {};
   },

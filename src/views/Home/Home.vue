@@ -28,8 +28,8 @@ export default {
         },
         {
           title: "后台管理",
-          path: "admin",
-          name: "Admin",
+          path: "mylayout",
+          name: "MyLayout",
         },
         {
           title: "数据可视化",
@@ -60,8 +60,8 @@ export default {
     },
     // 跳转
     togo(item) {
-      console.log(item.path);
-      if (item.path === "my" || item.path === "admin") {
+      // console.log(item.path);
+      if (item.path === "my" || item.path === "mylayout") {
         this.$router.push(item.name);
       } else {
         this.$message.info("功能开发中！！！");

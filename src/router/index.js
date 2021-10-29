@@ -5,28 +5,25 @@ const routes = [
     path: "/",
     name: "Home",
     meta: { title: "首页" },
-    component: () => import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
+    component: () => import("../views/Home/Home.vue"),
   },
   {
     path: "/my",
     name: "My",
     meta: { title: "个人主页" },
-    component: () => import(/* webpackChunkName: "My" */ "../views/My.vue"),
+    component: () => import("../views/Home/My.vue"),
   },
   {
-    path: "/admin",
-    name: "Admin",
+    path: "/mylayout",
+    name: "MyLayout",
     meta: { title: "后台管理" },
-    redirect: "/admin/index",
-    component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/layout.vue"),
+    component: () => import("../views/Home/MyLayout.vue"),
     children: [
       {
-        path: "/admin/index",
+        path: "",
         name: "AdminIndex",
         meta: { title: "后台管理——首页" },
-        component: () =>
-          import(/* webpackChunkName: "admin" */ "../pages/admin/index.vue"),
+        component: () => import("../views/Admin/index.vue"),
       },
     ],
   },

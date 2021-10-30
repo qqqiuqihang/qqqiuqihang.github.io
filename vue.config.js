@@ -1,6 +1,3 @@
-// const Components = require("unplugin-vue-components/webpack");
-// const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
-
 module.exports = {
   devServer: {
     open: true,
@@ -8,11 +5,4 @@ module.exports = {
   },
   lintOnSave: false,
   productionSourceMap: process.env.NODE_ENV === "production" ? true : false,
-  configureWebpack: {
-    // plugins: [
-    //   Components({
-    //     resolvers: [ElementPlusResolver()],
-    //   }),
-    // ],
-  },
 };

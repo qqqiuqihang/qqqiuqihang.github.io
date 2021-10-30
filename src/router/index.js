@@ -1,31 +1,17 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import homeRouter from "./module/home";
+import myRouter from "./module/my";
+import adminRouter from "./module/admin";
 
 const routes = [
+  homeRouter,
+  myRouter,
+  adminRouter,
   {
-    path: "/",
-    name: "Home",
-    meta: { title: "首页" },
-    component: () => import("../views/Home/Home.vue"),
-  },
-  {
-    path: "/my",
-    name: "My",
-    meta: { title: "个人主页" },
+    path: "/:pathMatch(.*)",
+    name: "404",
+    meta: { title: "404" },
     component: () => import("../views/Home/My.vue"),
-  },
-  {
-    path: "/mylayout",
-    name: "MyLayout",
-    meta: { title: "后台管理" },
-    component: () => import("../views/Home/MyLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "AdminIndex",
-        meta: { title: "后台管理——首页" },
-        component: () => import("../views/Admin/index.vue"),
-      },
-    ],
   },
 ];
 

@@ -46,7 +46,7 @@ export default {
       isCollapse: false,
     };
   },
-  setup(props, context) {
+  setup() {
     const handleOpen = (key, keyPath) => {
       console.log(key, keyPath);
     };
@@ -64,26 +64,26 @@ export default {
   height: calc(100% - 50px);
 }
 
-/deep/ .el-menu,
-/deep/.el-sub-menu__title {
+:deep(.el-menu),
+:deep(.el-sub-menu__title) {
   background-color: transparent;
 }
 
-/deep/.el-sub-menu__title:hover {
-  background-color: #fff !important;
+:deep(.el-sub-menu__title:hover) {
+  background-color: #2a395b !important;
 }
 
-.el-menu /deep/.el-menu-item {
+.el-menu :deep(.el-menu-item) {
   outline: 0;
-  background-color: #263d6b !important;
+  // background-color: #263d6b !important;
 
   &:hover {
-    background-color: #fff !important;
+    background-color: #2a395b !important;
   }
 }
 
 // 选中
-/deep/.is-active {
-  background: #f00 !important;
+:deep(.is-active) {
+  color: #fff;
 }
 </style>

@@ -9,5 +9,7 @@ import "./assets/css/global.css";
 import "./assets/css/initStyle.css";
 
 const app = createApp(App);
+
 installElementPlus(app);
+
 app.use(store).use(router).mount("#app");

@@ -3,6 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import installElementPlus from "./plugins/element";
+import axios from "./axios";
+
+// 模拟数据
+import "../mock";
 
 // 导入初始化和全局样式
 import "./assets/css/global.css";
@@ -12,4 +16,5 @@ const app = createApp(App);
 
 installElementPlus(app);
 
+app.config.globalProperties.$axios = axios;
 app.use(store).use(router).mount("#app");

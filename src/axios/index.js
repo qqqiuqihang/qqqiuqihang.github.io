@@ -11,3 +11,5 @@ let instance = axios.create({
   params: {}, //请求参数拼接在url上面
   data: {}, //请求参数放请求体里
 });
+
+export default instance;

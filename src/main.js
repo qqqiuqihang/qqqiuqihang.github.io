@@ -6,7 +6,7 @@ import installElementPlus from "./plugins/element";
 import axios from "./axios";
 
 // 模拟数据
-import "../mock";
+import "./mock";
 
 // 导入初始化和全局样式
 import "./assets/css/global.css";

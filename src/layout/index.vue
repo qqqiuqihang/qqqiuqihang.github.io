@@ -29,7 +29,7 @@ export default {
   components: { MyHeader, MyAside },
   setup() {
     const store = useStore();
-    console.log(store.state);
+    // console.log(store.state);
     // console.log(store.state.user.personalConfig.routeList);
 
     const sidebars = store.state.user?.personalConfig?.routeList ?? [];

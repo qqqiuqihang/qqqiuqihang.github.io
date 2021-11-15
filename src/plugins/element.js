@@ -11,6 +11,8 @@ import {
   ElSubMenu,
   ElLoading,
   ElScrollbar,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -26,6 +28,8 @@ const components = [
   ElMenuItemGroup,
   ElSubMenu,
   ElScrollbar,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
 ];
 
 const plugins = [ElLoading];

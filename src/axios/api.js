@@ -7,7 +7,7 @@ let obj = {
 console.log(obj);
 
 export default {
-  async aaa(options, data, config) {
+  async routerList(options, data, config) {
     return await axios[options.type](
       options.url,
       Qs.stringify(data),

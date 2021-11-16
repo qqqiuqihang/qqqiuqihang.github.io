@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb separator-class="el-icon-arrowRight">
+  <el-breadcrumb>
     <el-breadcrumb-item
       :to="{ path: item.path }"
       :replace="item.replace ? true : false"
@@ -11,12 +11,7 @@
   </el-breadcrumb>
 </template>
 
-<script lang="ts" setup>
-import { ArrowRight } from "@element-plus/icons";
-</script>
-
 <script>
-// import { ArrowRight } from "@element-plus/icons";
 export default {
   name: "MyBreadcrumb",
   props: {
@@ -28,7 +23,9 @@ export default {
   data() {
     return {};
   },
-  //   components: { ArrowRight },
+  create() {
+    console.log(this.$store.state);
+  },
   methods: {},
 };
 </script>

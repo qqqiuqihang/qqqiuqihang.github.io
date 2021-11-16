@@ -1,12 +1,41 @@
 <template>
   <el-container class="layout_container">
+    <!-- 左边侧边栏 -->
     <el-aside :width="asideWidth + 'px'">
+      <!-- 底部首页logo -->
       <div class="logo" :style="{ height: headerHeight + 'px' }">logo</div>
-      <my-aside :sidebar-list="sidebars" />
+      <!-- 侧边导航组件 -->
+      <my-aside :isCollapse="isAsideCollapse" :sidebar-list="sidebars" />
     </el-aside>
+    <!-- 右侧 -->
     <el-container class="main_container">
-      <el-header :height="headerHeight + 'px'"> <my-header /> </el-header>
+      <!-- 头部 -->
+      <el-header :height="headerHeight + 'px'">
+        <!-- 左侧侧边栏收缩按钮 -->
+        <el-icon
+          class="isCollapseIcon"
+          v-if="isAsideCollapse"
+          @click="toggleSideCollapse(false)"
+        >
+          <Expand />
+        </el-icon>
+        <el-icon
+          class="isCollapseIcon"
+          v-else
+          @click="toggleSideCollapse(true)"
+        >
+          <Fold />
+        </el-icon>
+        <!-- 面包屑导航 -->
+        <MyBreadcrumb :list="breadcrumbList" />
+        <!-- 头部组件 -->
+        <my-header />
+      </el-header>
+      <!-- 主体内容区 -->
       <el-main>
+        <!-- tab 动态切换组件 -->
+        <my-tabs v-model:list="tabList" />
+        <!-- 二级路由页面 -->
         <router-view />
       </el-main>
     </el-container>
@@ -16,21 +45,36 @@
 <script>
 // import { reactive } from "vue";
 import { useStore } from "vuex";
+import { Expand, Fold } from "@element-plus/icons";
+import MyBreadcrumb from "@/components/MyBreadcrumb.vue";
 import MyHeader from "./components/MyHeader.vue";
 import MyAside from "./components/MyAside.vue";
+import MyTabs from "./components/MyTabs.vue";
 export default {
   name: "MyLayout",
   data() {
     return {
       asideWidth: 200,
       headerHeight: 48,
+      isAsideCollapse: false,
+      tabList: [
+        { label: "User", name: "first", path: "" },
+        { label: "Config", name: "second", path: "" },
+        { label: "Role", name: "third", path: "" },
+        { label: "Task", name: "fourth", path: "" },
+      ],
+      breadcrumbList: [
+        { path: "/welcome", name: "homepage" },
+        { path: "/welcome", name: "homepage" },
+        { name: "homepage" },
+      ],
     };
   },
-  components: { MyHeader, MyAside },
+  components: { MyHeader, MyAside, MyTabs, MyBreadcrumb, Expand, Fold },
   setup() {
     const store = useStore();
-    // console.log(store.state);
-    // console.log(store.state.user.personalConfig.routeList);
+
+    store.dispatch("getRouteList");
 
     const sidebars = store.state.user?.personalConfig?.routeList ?? [];
 
@@ -38,7 +82,14 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    // 切换侧边栏状态
+    toggleSideCollapse(val) {
+      console.log(val);
+      this.isAsideCollapse = val;
+      this.asideWidth = val ? 64 : 200;
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -55,11 +106,42 @@ export default {
   }
 
   .el-header {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
     background-color: #1b2a47;
+
+    .el-breadcrumb {
+      margin-right: 10px;
+    }
+
+    :deep(.el-breadcrumb__item) {
+      .el-breadcrumb__inner {
+        color: white;
+        &:hover {
+          color: #409eff;
+        }
+      }
+      &:last-child {
+        .el-breadcrumb__inner:hover {
+          color: white;
+        }
+      }
+    }
   }
+
+  .isCollapseIcon {
+    color: #fff;
+    font-size: 30px;
+    transform: translateX(-18px);
+    cursor: pointer;
+  }
+
   .el-aside {
     background-color: #1b2a47;
+    transition: all 0.5s;
   }
+
   .main_container {
     height: calc(100%);
   }

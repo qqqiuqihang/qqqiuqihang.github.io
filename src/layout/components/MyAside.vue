@@ -1,38 +1,28 @@
 <template>
   <el-scrollbar>
     <el-menu
-      default-active="2"
+      default-active="1"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="true"
-      @open="handleOpen"
-      @close="handleClose"
-      text-color="#5b80b4"
-      active-text-color="#fff"
+      @select="handleSelect"
+      :text-color="textColor"
+      :active-text-color="activeTextColor"
     >
-      <el-sub-menu
-        :index="fristItem.path"
-        v-for="(fristItem, index) in sidebarList"
+      <!-- @open="handleOpen"
+      @close="handleClose" -->
+      <MyAsideItem
+        :list="item"
+        v-for="(item, index) in sidebarList"
         :key="index"
-      >
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>{{ fristItem.name }}</span>
-        </template>
-        <el-menu-item
-          :index="seconed.path"
-          v-for="(seconed, index) in fristItem.children"
-          :key="index"
-        >
-          <i class="el-icon-location"></i>
-          <span>{{ seconed.name }}</span>
-        </el-menu-item>
-      </el-sub-menu>
+      />
     </el-menu>
   </el-scrollbar>
 </template>
 
 <script>
+import MyAsideItem from "./MyAsideItem.vue";
+import { watchEffect, ref } from "vue";
 export default {
   name: "MyAside",
   props: {
@@ -40,26 +30,51 @@ export default {
       type: Array,
       default: () => [],
     },
+    isCollapse: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
-    return {
-      isCollapse: false,
-    };
+    return {};
   },
-  setup() {
+  components: { MyAsideItem },
+  mounted() {},
+  setup(props) {
     const handleOpen = (key, keyPath) => {
-      console.log(key, keyPath);
+      console.log("handleOpen", key, keyPath);
     };
 
     const handleClose = (key, keyPath) => {
-      console.log(key, keyPath);
+      console.log("handleClose", key, keyPath);
     };
 
-    return { handleOpen, handleClose };
+    const handleSelect = (key, keyPath) => {
+      console.log("handleSelect", key, keyPath);
+    };
+
+    const textColor = ref("#5b80b4");
+    const activeTextColor = ref("#fff");
+    watchEffect(() => {
+      activeTextColor.value = props.isCollapse ? "#409EFF" : "#fff";
+    });
+
+    return {
+      handleOpen,
+      handleClose,
+      handleSelect,
+      textColor,
+      activeTextColor,
+    };
   },
 };
 </script>
 <style lang="less" scoped>
+:deep(.iconfont) {
+  margin-right: 5px;
+  // color: #fff;
+}
+
 .el-scrollbar {
   height: calc(100% - 50px);
 }
@@ -73,12 +88,16 @@ export default {
   background-color: #2a395b !important;
 }
 
-.el-menu :deep(.el-menu-item) {
-  outline: 0;
-  // background-color: #263d6b !important;
+.el-menu {
+  border-right: none;
 
-  &:hover {
-    background-color: #2a395b !important;
+  :deep(.el-menu-item) {
+    outline: 0;
+    // background-color: #263d6b !important;
+
+    &:hover {
+      background-color: #2a395b !important;
+    }
   }
 }
 

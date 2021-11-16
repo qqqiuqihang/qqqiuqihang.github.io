@@ -1,5 +1,7 @@
 <template>
-  <div class="header-container">我是头部</div>
+  <div class="header_container">
+    <span>我是头部</span>
+  </div>
 </template>
 
 <script>
@@ -8,14 +10,14 @@ export default {
   data() {
     return {};
   },
-
   components: {},
-
   created() {},
-
   mounted() {},
-
   methods: {},
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.header_container {
+  color: white;
+}
+</style>

@@ -13,6 +13,9 @@ import {
   ElScrollbar,
   ElBreadcrumb,
   ElBreadcrumbItem,
+  ElTabs,
+  ElTabPane,
+  ElIcon,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -30,6 +33,9 @@ const components = [
   ElScrollbar,
   ElBreadcrumb,
   ElBreadcrumbItem,
+  ElTabs,
+  ElTabPane,
+  ElIcon,
 ];
 
 const plugins = [ElLoading];

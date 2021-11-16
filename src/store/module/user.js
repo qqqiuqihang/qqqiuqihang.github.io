@@ -40,15 +40,16 @@ export default {
   getter: {},
   mutations: {
     setRouteList(state, val) {
-      console.log(state, val);
+      state.personalConfig.routeList = val;
     },
   },
   actions: {
     async getRouteList(context) {
-      const { data: res } = await request();
-      console.log(res);
-
-      context.commit("setRouteList", "1111111111");
+      const { data: res } = await request.routerList({
+        method: "get",
+        url: "get",
+      });
+      context.commit("setRouteList", res.list);
     },
   },
 };

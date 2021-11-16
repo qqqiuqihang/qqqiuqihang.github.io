@@ -1,9 +1,8 @@
 import axios from "axios";
-import qs from "qs";
 // import store from "@/store";
 
 // let baseURL;
-// 环境的切换
+// // 环境的切换
 // if (process.env.NODE_ENV == "development") {
 //   baseURL = "";
 // } else if (process.env.NODE_ENV == "debug") {
@@ -104,13 +103,11 @@ axios.interceptors.response.use(
   }
 );
 
-export default async (options, datas, responseType = {}) => {
-  return await instance({
-    method: options.method,
+export default (options, datas, responseType = {}) => {
+  return instance({
+    method: options.method.toUpperCase(),
     url: options.url,
-    [options.method === "get" ? "params" : "data"]: () => {
-      return options.method === "get" ? datas : qs.stringify(datas);
-    },
+    [options.method.toLowerCase() === "get" ? "params" : "data"]: datas,
     ...responseType,
   }).catch((e) => e);
 };

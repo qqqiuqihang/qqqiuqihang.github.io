@@ -1,17 +1,20 @@
-import axios from "./index";
+import request from "./index";
 import Qs from "qs";
 
-let obj = {
+const obj = {
   mockTest: "/mock",
 };
-console.log(obj);
 
 export default {
-  async routerList(options, data, config) {
-    return await axios[options.type](
-      options.url,
-      Qs.stringify(data),
-      config
-    ).catch((e) => e);
+  // 获取侧边导航栏
+  async routerList(options, data, responseType) {
+    return request(
+      {
+        method: options.method,
+        url: `${obj.mockTest}/api/system/${options.url}`,
+      },
+      options.method.toLowerCase() === "get" ? data : Qs.stringify(data),
+      responseType
+    );
   },
 };

@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import installElementPlus from "./plugins/element";
-import axios from "./axios";
+import axios from "./axios/api.js";
 
 // 模拟数据
 import "./mock";

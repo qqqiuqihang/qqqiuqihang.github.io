@@ -34,7 +34,10 @@
       <!-- 主体内容区 -->
       <el-main>
         <!-- tab 动态切换组件 -->
-        <my-tabs v-model:list="tabList" />
+        <my-tabs
+          v-model:list="tabList"
+          v-show="tabList && tabList.length > 0"
+        />
         <!-- 二级路由页面 -->
         <router-view />
       </el-main>
@@ -58,10 +61,10 @@ export default {
       headerHeight: 48,
       isAsideCollapse: false,
       tabList: [
-        { label: "User", name: "first", path: "" },
-        { label: "Config", name: "second", path: "" },
-        { label: "Role", name: "third", path: "" },
-        { label: "Task", name: "fourth", path: "" },
+        // { label: "User", name: "first", path: "" },
+        // { label: "Config", name: "second", path: "" },
+        // { label: "Role", name: "third", path: "" },
+        // { label: "Task", name: "fourth", path: "" },
       ],
       breadcrumbList: [
         { path: "/welcome", name: "homepage" },

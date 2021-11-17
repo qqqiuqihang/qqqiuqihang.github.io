@@ -1,32 +1,27 @@
 <template>
   <el-breadcrumb>
-    <el-breadcrumb-item
-      :to="{ path: item.path }"
-      :replace="item.replace ? true : false"
-      v-for="(item, index) in list"
-      :key="index"
-    >
+    <el-breadcrumb-item :to="{ path: '/welcome' }"> 首页 </el-breadcrumb-item>
+    <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
       {{ item.name }}
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "MyBreadcrumb",
-  props: {
-    list: {
-      type: Array,
-      default: () => [{ path: "/", name: "MyBreadcrumb" }],
-    },
-  },
   data() {
     return {};
   },
-  create() {
-    console.log(this.$store.state);
+  created() {
+    // console.log(this.$store.state);
   },
   methods: {},
+  computed: mapState({
+    breadcrumbList: (state) => state.user.breadcrumbList,
+  }),
 };
 </script>
 

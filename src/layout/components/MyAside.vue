@@ -9,8 +9,6 @@
       :text-color="textColor"
       :active-text-color="activeTextColor"
     >
-      <!-- @open="handleOpen"
-      @close="handleClose" -->
       <MyAsideItem
         :list="item"
         v-for="(item, index) in sidebarList"
@@ -23,6 +21,7 @@
 <script>
 import MyAsideItem from "./MyAsideItem.vue";
 import { watchEffect, ref } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "MyAside",
   props: {
@@ -41,16 +40,11 @@ export default {
   components: { MyAsideItem },
   mounted() {},
   setup(props) {
-    const handleOpen = (key, keyPath) => {
-      console.log("handleOpen", key, keyPath);
-    };
-
-    const handleClose = (key, keyPath) => {
-      console.log("handleClose", key, keyPath);
-    };
+    const store = useStore();
 
     const handleSelect = (key, keyPath) => {
       console.log("handleSelect", key, keyPath);
+      store.commit("sidebarSetBreadcrumbList", keyPath);
     };
 
     const textColor = ref("#5b80b4");
@@ -60,8 +54,6 @@ export default {
     });
 
     return {
-      handleOpen,
-      handleClose,
       handleSelect,
       textColor,
       activeTextColor,

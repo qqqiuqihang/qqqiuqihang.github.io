@@ -10,12 +10,8 @@
       :key="index"
     />
   </el-sub-menu>
-  <el-menu-item
-    :index="list.path"
-    :route="list.route"
-    @click="togoTarget($event, list)"
-    v-else
-  >
+  <el-menu-item :index="list.path" :route="list.route" v-else>
+    <!-- @click="togoTarget($event, list)" -->
     <i class="iconfont" :class="`icon-icon-${list.icon}`"></i>
     <span>{{ list.name }}</span>
   </el-menu-item>

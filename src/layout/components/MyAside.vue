@@ -1,13 +1,14 @@
 <template>
   <el-scrollbar>
     <el-menu
-      default-active="1"
+      :default-active="defaultActive"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="true"
       @select="handleSelect"
       :text-color="textColor"
       :active-text-color="activeTextColor"
+      router
     >
       <MyAsideItem
         :list="item"
@@ -20,7 +21,7 @@
 
 <script>
 import MyAsideItem from "./MyAsideItem.vue";
-import { watchEffect, ref } from "vue";
+import { watchEffect, ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "MyAside",
@@ -43,8 +44,9 @@ export default {
     const store = useStore();
 
     const handleSelect = (key, keyPath) => {
-      console.log("handleSelect", key, keyPath);
+      // console.log("handleSelect", key, keyPath);
       store.commit("sidebarSetBreadcrumbList", keyPath);
+      store.commit("setDefaultActive", key);
     };
 
     const textColor = ref("#5b80b4");
@@ -53,10 +55,15 @@ export default {
       activeTextColor.value = props.isCollapse ? "#409EFF" : "#fff";
     });
 
+    onMounted(() => {
+      store.commit("getDefaultActive");
+    });
+
     return {
       handleSelect,
       textColor,
       activeTextColor,
+      defaultActive: computed(() => store.state.user.defaultActive),
     };
   },
 };

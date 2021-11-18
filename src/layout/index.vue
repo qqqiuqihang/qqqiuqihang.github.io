@@ -27,7 +27,7 @@
           <Fold />
         </el-icon>
         <!-- 面包屑导航 -->
-        <MyBreadcrumb :list="breadcrumbList" />
+        <MyBreadcrumb />
         <!-- 头部组件 -->
         <my-header />
       </el-header>
@@ -49,7 +49,7 @@
 // import { reactive } from "vue";
 import { useStore } from "vuex";
 import { Expand, Fold } from "@element-plus/icons";
-import MyBreadcrumb from "@/components/MyBreadcrumb.vue";
+import MyBreadcrumb from "./components/MyBreadcrumb.vue";
 import MyHeader from "./components/MyHeader.vue";
 import MyAside from "./components/MyAside.vue";
 import MyTabs from "./components/MyTabs.vue";
@@ -60,17 +60,7 @@ export default {
       asideWidth: 200,
       headerHeight: 48,
       isAsideCollapse: false,
-      tabList: [
-        // { label: "User", name: "first", path: "" },
-        // { label: "Config", name: "second", path: "" },
-        // { label: "Role", name: "third", path: "" },
-        // { label: "Task", name: "fourth", path: "" },
-      ],
-      breadcrumbList: [
-        { path: "/welcome", name: "homepage" },
-        { path: "/welcome", name: "homepage" },
-        { name: "homepage" },
-      ],
+      tabList: [],
     };
   },
   components: { MyHeader, MyAside, MyTabs, MyBreadcrumb, Expand, Fold },
@@ -88,7 +78,6 @@ export default {
   methods: {
     // 切换侧边栏状态
     toggleSideCollapse(val) {
-      console.log(val);
       this.isAsideCollapse = val;
       this.asideWidth = val ? 64 : 200;
     },
@@ -113,24 +102,6 @@ export default {
     // justify-content: center;
     align-items: center;
     background-color: #1b2a47;
-
-    .el-breadcrumb {
-      margin-right: 10px;
-    }
-
-    :deep(.el-breadcrumb__item) {
-      .el-breadcrumb__inner {
-        color: white;
-        &:hover {
-          color: #409eff;
-        }
-      }
-      &:last-child {
-        .el-breadcrumb__inner:hover {
-          color: white;
-        }
-      }
-    }
   }
 
   .isCollapseIcon {

@@ -10,6 +10,7 @@ export default {
         routeList: [],
       },
       breadcrumbList: [], // 面包屑导航列表
+      defaultActive: "", // 导航栏默认选中项
     };
   },
   getter: {},
@@ -24,14 +25,27 @@ export default {
       let route = [...state.personalConfig.routeList];
       let arr = recursiveTraversal(route, val);
       state.breadcrumbList = arr;
+      state.defaultActive = val[val.length - 1];
+
+      setSession("breadcrumbList", arr);
     },
     // 其他修改面包屑导航
-    otherPushBreadcrumbList(state, currentRoute, nextRoute) {
+    otherEditBreadcrumbList(state, currentRoute, nextRoute) {
       console.log(state, currentRoute, nextRoute);
-      const len = state.system.breadcrumbList.length;
-      if (currentRoute)
-        state.system.breadcrumbList[len - 1].path = currentRoute;
-      if (nextRoute) state.system.breadcrumbList.push(nextRoute);
+    },
+    setDefaultActive(state, val) {
+      state.defaultActive = val;
+      setSession("defaultActive", val);
+    },
+    getDefaultActive(state) {
+      state.defaultActive = getSession("defaultActive");
+    },
+    setBreadcrumbList(state, val) {
+      state.breadcrumbList = val;
+      setSession("breadcrumbList", val);
+    },
+    getBreadcrumbList(state) {
+      state.breadcrumbList = getSession("breadcrumbList");
     },
   },
   actions: {
@@ -44,6 +58,16 @@ export default {
     },
   },
 };
+
+// 保存本地session
+function setSession(str, val) {
+  sessionStorage.setItem(str, JSON.stringify(val));
+}
+
+// 获取本地session
+function getSession(str) {
+  return JSON.parse(sessionStorage.getItem(str)) ?? "";
+}
 
 // 递归遍历
 function recursiveTraversal(arr, target, newArr = []) {

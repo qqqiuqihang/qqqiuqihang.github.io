@@ -18,6 +18,8 @@ export default {
 </script>
 <style lang="less" scoped>
 .header_container {
+  flex: 1;
   color: white;
+  text-align: right;
 }
 </style>

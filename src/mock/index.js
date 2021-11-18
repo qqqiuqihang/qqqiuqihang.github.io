@@ -7,24 +7,36 @@ Mock.mock("/mock/api/system/get", {
   list: [
     {
       name: "工具类",
-      path: "utool",
+      path: "/utool",
       icon: "test8",
       children: [
         {
           name: "EXCEL 导入",
-          path: "excleImport",
+          path: "/utool/importexcel",
           icon: "test12",
         },
       ],
     },
     {
       name: "链接类",
-      path: "link",
+      path: "/link",
       icon: "test8",
       children: [
         {
           name: "第三方",
-          path: "otherLink",
+          path: "/link/link",
+          icon: "test12",
+        },
+      ],
+    },
+    {
+      name: "管理类",
+      path: "/manage",
+      icon: "test8",
+      children: [
+        {
+          name: "人员",
+          path: "/manage/person",
           icon: "test12",
         },
       ],

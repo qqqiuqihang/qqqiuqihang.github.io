@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb>
-    <el-breadcrumb-item :to="{ path: '/welcome' }" @click="clickHandler()">
+    <el-breadcrumb-item :to="{ path: '/welcome' }" @click="clickHandler('')">
       首页
     </el-breadcrumb-item>
     <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
@@ -28,7 +28,7 @@ export default {
       "getBreadcrumbList",
       "setBreadcrumbList",
     ]),
-    clickHandler(val = []) {
+    clickHandler(val) {
       this.setDefaultActive(val);
       this.setBreadcrumbList(val);
     },

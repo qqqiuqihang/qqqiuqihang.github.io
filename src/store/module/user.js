@@ -11,6 +11,7 @@ export default {
       },
       breadcrumbList: [], // 面包屑导航列表
       defaultActive: "", // 导航栏默认选中项
+      tabbarList: [],
     };
   },
   getter: {},
@@ -33,18 +34,32 @@ export default {
     otherEditBreadcrumbList(state, currentRoute, nextRoute) {
       console.log(state, currentRoute, nextRoute);
     },
+    // 侧边栏默认选中
     setDefaultActive(state, val) {
       state.defaultActive = val;
       setSession("defaultActive", val);
     },
+    // 侧边栏默认选中
     getDefaultActive(state) {
       state.defaultActive = getSession("defaultActive");
     },
+    // 面包屑导航
     setBreadcrumbList(state, val) {
       state.breadcrumbList = val;
       setSession("breadcrumbList", val);
     },
+    // 面包屑导航
     getBreadcrumbList(state) {
+      state.breadcrumbList = getSession("breadcrumbList");
+    },
+    // tabbar 切换
+    setTabbarList(state, val) {
+      console.log("tabbar qiehuan toggle", val);
+      // state.tabbarList = val;
+      // setSession("breadcrumbList", val);
+    },
+    // tabbar 切换
+    getTabbarList(state) {
       state.breadcrumbList = getSession("breadcrumbList");
     },
   },

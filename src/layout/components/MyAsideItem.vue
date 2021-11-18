@@ -10,8 +10,13 @@
       :key="index"
     />
   </el-sub-menu>
-  <el-menu-item :index="list.path" :route="list.route" v-else>
-    <!-- @click="togoTarget($event, list)" -->
+  <el-menu-item
+    :index="list.path"
+    :route="list.route"
+    v-else
+    @click="togoTarget($event, list)"
+  >
+    <!--  -->
     <i class="iconfont" :class="`icon-icon-${list.icon}`"></i>
     <span>{{ list.name }}</span>
   </el-menu-item>
@@ -36,6 +41,7 @@ export default {
     // 点击事件
     togoTarget(e, val) {
       console.log(e, val);
+      this.$store.commit("setTabbarList", val);
     },
     // 是否有子节点
     isHaveChildren(val) {

@@ -52,15 +52,23 @@ export default {
     getBreadcrumbList(state) {
       state.breadcrumbList = getSession("breadcrumbList");
     },
-    // tabbar 切换
+    // tabbar 切换 0为sidebar点击 1位tabbar删除
     setTabbarList(state, val) {
-      console.log("tabbar qiehuan toggle", val);
-      // state.tabbarList = val;
-      // setSession("breadcrumbList", val);
+      // console.log("tabbar qiehuan toggle", state.tabbarList, val);
+      const index = state.tabbarList.findIndex((tab) => tab.path === val.path);
+      if (index !== -1) state.tabbarList.splice(index, 1);
+      state.tabbarList.push(val);
+
+      setSession("tabbarList", state.tabbarList);
+    },
+    // tabbar 切换 0为sidebar点击 1位tabbar删除
+    setTabbarListTwo(state, val) {
+      state.tabbarList = val;
+      setSession("tabbarList", state.tabbarList);
     },
     // tabbar 切换
     getTabbarList(state) {
-      state.breadcrumbList = getSession("breadcrumbList");
+      state.tabbarList = getSession("tabbarList");
     },
   },
   actions: {
@@ -84,7 +92,7 @@ function getSession(str) {
   return JSON.parse(sessionStorage.getItem(str)) ?? "";
 }
 
-// 递归遍历
+// 递归遍历1
 function recursiveTraversal(arr, target, newArr = []) {
   const index = arr.findIndex((item) => item.path === target[0]);
   newArr.push({ name: arr[index].name, path: arr[index].path });

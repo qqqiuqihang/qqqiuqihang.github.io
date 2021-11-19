@@ -34,10 +34,7 @@
       <!-- 主体内容区 -->
       <el-main>
         <!-- tab 动态切换组件 -->
-        <my-tabs
-          v-model:list="tabList"
-          v-show="tabList && tabList.length > 0"
-        />
+        <my-tabs v-show="tabbarList && tabbarList.length > 0" />
         <!-- 二级路由页面 -->
         <router-view />
       </el-main>
@@ -46,7 +43,7 @@
 </template>
 
 <script>
-// import { reactive } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { Expand, Fold } from "@element-plus/icons";
 import MyBreadcrumb from "./components/MyBreadcrumb.vue";
@@ -60,7 +57,6 @@ export default {
       asideWidth: 200,
       headerHeight: 48,
       isAsideCollapse: false,
-      tabList: [],
     };
   },
   components: { MyHeader, MyAside, MyTabs, MyBreadcrumb, Expand, Fold },
@@ -71,7 +67,10 @@ export default {
 
     const sidebars = store.state.user?.personalConfig?.routeList ?? [];
 
-    return { sidebars };
+    return {
+      sidebars,
+      tabbarList: computed(() => store.state.user.tabbarList),
+    };
   },
   created() {},
   mounted() {},

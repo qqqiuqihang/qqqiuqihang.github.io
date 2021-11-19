@@ -27,10 +27,12 @@ export default {
       "setDefaultActive",
       "getBreadcrumbList",
       "setBreadcrumbList",
+      "setTabbarListTwo",
     ]),
     clickHandler(val) {
       this.setDefaultActive(val);
       this.setBreadcrumbList(val);
+      this.setTabbarListTwo([]);
     },
   },
   computed: mapState({

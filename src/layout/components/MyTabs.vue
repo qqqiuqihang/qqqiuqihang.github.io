@@ -1,15 +1,15 @@
 <template>
   <el-tabs
-    v-model="activeName"
+    v-model="active"
     type="card"
-    :closable="number === 1 ? false : true"
+    :closable="tabbarList.length <= 1 ? false : true"
     @tab-click="tabClick"
     @tab-remove="tabRemove"
   >
     <el-tab-pane
-      :label="item.label"
-      :name="item.name"
-      v-for="(item, index) in list"
+      :label="item.name"
+      :name="item.path"
+      v-for="(item, index) in tabbarList"
       :key="index"
     >
     </el-tab-pane>
@@ -17,66 +17,67 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { computed, watch, ref } from "vue";
+import { recursiveTraversalResver } from "@/assets/js/common";
+
 export default {
   name: "MyTabs",
-  // model: {
-  //   prop: "list",
-  //   event: "change",
-  // },
-  props: {
-    list: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
+    return {};
+  },
+  setup() {
+    const active = ref("");
+    const store = useStore();
+    // const listLength = ref(0);
+
+    watch(
+      [() => store.state.user.tabbarList, () => store.state.user.defaultActive],
+      () => {
+        active.value = store.state.user.defaultActive;
+      }
+    );
+
     return {
-      activeName: "first",
-      number: 0,
+      active,
+      tabbarList: computed(() => store.state.user.tabbarList),
     };
   },
   components: {},
-  created() {},
+  created() {
+    this.$store.commit("getTabbarList");
+  },
   mounted() {},
   methods: {
     // tab 选项卡点击事件
     tabClick(tab) {
-      // console.log(tab.index, tab.paneName);
-      const tabs = this.list;
-      this.togoTarget(tabs[tab.index]);
-    },
-
-    // 路由跳转
-    togoTarget(target) {
-      console.log(target);
+      const router = [...this.$store.state.user.personalConfig.routeList];
+      const list = recursiveTraversalResver(router, tab.props.name);
+      this.$store.commit("setDefaultActive", tab.props.name);
+      this.$store.commit("setBreadcrumbList", list);
+      this.$router.push({ path: tab.props.name });
     },
 
     // 移除 tab 选项卡
     tabRemove(targetName) {
-      const tabs = this.list;
-      let activeName = this.activeName;
-      if (activeName === targetName) {
+      const tabs = [...this.tabbarList];
+      let active = this.active;
+      if (active === targetName) {
         tabs.forEach((tab, index) => {
-          if (tab.name === targetName) {
+          if (tab.path === targetName) {
             const nextTab = tabs[index + 1] || tabs[index - 1];
-            this.togoTarget(nextTab);
-            if (nextTab) {
-              activeName = nextTab.name;
-            }
+            if (nextTab) active = nextTab.path;
           }
         });
       }
-      this.activeName = activeName;
-      const newList = tabs.filter((tab) => tab.name !== targetName);
-      this.$emit("update:list", newList);
-    },
-  },
-  watch: {
-    list: {
-      handler: function (newVal) {
-        console.log(newVal);
-        this.number = newVal.length;
-      },
+      const router = [...this.$store.state.user.personalConfig.routeList];
+      const list = recursiveTraversalResver(router, active);
+      this.$store.commit("setDefaultActive", active);
+      this.$store.commit("setBreadcrumbList", list);
+      const newList = tabs.filter((tab) => tab.path !== targetName);
+      console.log(active, list, newList);
+      this.$store.commit("setTabbarListTwo", newList, 1);
+      this.$router.push({ path: active });
     },
   },
 };

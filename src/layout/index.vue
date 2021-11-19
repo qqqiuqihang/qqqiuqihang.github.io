@@ -62,13 +62,10 @@ export default {
   components: { MyHeader, MyAside, MyTabs, MyBreadcrumb, Expand, Fold },
   setup() {
     const store = useStore();
-
     store.dispatch("getRouteList");
 
-    const sidebars = store.state.user?.routeList ?? [];
-
     return {
-      sidebars,
+      sidebars: computed(() => store.state.user?.routeList ?? []),
       tabbarList: computed(() => store.state.system.tabbarList),
     };
   },

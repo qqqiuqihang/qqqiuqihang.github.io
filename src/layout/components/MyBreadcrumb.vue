@@ -35,7 +35,7 @@ export default {
     },
   },
   computed: mapState({
-    breadcrumbList: (state) => state.user.breadcrumbList,
+    breadcrumbList: (state) => state.system.breadcrumbList,
   }),
 };
 </script>

@@ -66,18 +66,19 @@ export default {
         tabs.forEach((tab, index) => {
           if (tab.path === targetName) {
             const nextTab = tabs[index + 1] || tabs[index - 1];
-            if (nextTab) active = nextTab.path;
+            if (nextTab) {
+              active = nextTab.path;
+              this.$router.push({ path: active });
+            }
           }
         });
       }
       const router = [...this.$store.state.user.personalConfig.routeList];
       const list = recursiveTraversalResver(router, active);
+      const newList = tabs.filter((tab) => tab.path !== targetName);
       this.$store.commit("setDefaultActive", active);
       this.$store.commit("setBreadcrumbList", list);
-      const newList = tabs.filter((tab) => tab.path !== targetName);
-      console.log(active, list, newList);
       this.$store.commit("setTabbarListTwo", newList, 1);
-      this.$router.push({ path: active });
     },
   },
 };

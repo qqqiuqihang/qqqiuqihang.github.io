@@ -40,7 +40,6 @@ export default {
   methods: {
     // 点击事件
     togoTarget(e, val) {
-      console.log(e, val);
       this.$store.commit("setTabbarList", val);
     },
     // 是否有子节点

@@ -60,7 +60,6 @@ export default {
     },
     // 跳转
     togo(item) {
-      // console.log(item.path);
       if (item.path === "my" || item.path === "mylayout") {
         this.$router.push(item.name);
       } else {

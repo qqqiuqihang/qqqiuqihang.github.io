@@ -22,7 +22,6 @@ export default {
     },
     // 侧边栏点击修改面包屑导航
     sidebarSetBreadcrumbList(state, val) {
-      // console.log(state, val);
       let route = [...state.personalConfig.routeList];
       let arr = recursiveTraversal(route, val);
       state.breadcrumbList = arr;
@@ -32,7 +31,7 @@ export default {
     },
     // 其他修改面包屑导航
     otherEditBreadcrumbList(state, currentRoute, nextRoute) {
-      console.log(state, currentRoute, nextRoute);
+      // console.log(state, currentRoute, nextRoute);
     },
     // 侧边栏默认选中
     setDefaultActive(state, val) {
@@ -52,23 +51,22 @@ export default {
     getBreadcrumbList(state) {
       state.breadcrumbList = getSession("breadcrumbList");
     },
-    // tabbar 切换 0为sidebar点击 1位tabbar删除
+    // tabbar 切换
     setTabbarList(state, val) {
-      // console.log("tabbar qiehuan toggle", state.tabbarList, val);
       const index = state.tabbarList.findIndex((tab) => tab.path === val.path);
       if (index !== -1) state.tabbarList.splice(index, 1);
       state.tabbarList.push(val);
 
       setSession("tabbarList", state.tabbarList);
     },
-    // tabbar 切换 0为sidebar点击 1位tabbar删除
+    // tabbar 切换
     setTabbarListTwo(state, val) {
       state.tabbarList = val;
       setSession("tabbarList", state.tabbarList);
     },
     // tabbar 切换
     getTabbarList(state) {
-      state.tabbarList = getSession("tabbarList");
+      state.tabbarList = getSession("tabbarList") || [];
     },
   },
   actions: {

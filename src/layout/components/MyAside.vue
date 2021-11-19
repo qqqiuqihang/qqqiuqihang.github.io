@@ -44,7 +44,6 @@ export default {
     const store = useStore();
 
     const handleSelect = (key, keyPath) => {
-      // console.log("handleSelect", key, keyPath);
       store.commit("sidebarSetBreadcrumbList", keyPath);
       store.commit("setDefaultActive", key);
     };

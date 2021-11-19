@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 const dataDtate = createPersistedState({
   key: "my-user",
-  paths: ["user.token", "user.personalConfig"],
+  paths: ["user"],
   storage: window.localStorage,
 });
 

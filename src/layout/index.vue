@@ -65,11 +65,11 @@ export default {
 
     store.dispatch("getRouteList");
 
-    const sidebars = store.state.user?.personalConfig?.routeList ?? [];
+    const sidebars = store.state.user?.routeList ?? [];
 
     return {
       sidebars,
-      tabbarList: computed(() => store.state.user.tabbarList),
+      tabbarList: computed(() => store.state.system.tabbarList),
     };
   },
   created() {},

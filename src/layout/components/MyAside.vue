@@ -44,7 +44,7 @@ export default {
     const store = useStore();
 
     const handleSelect = (key, keyPath) => {
-      store.commit("sidebarSetBreadcrumbList", keyPath);
+      store.dispatch("setDemo", keyPath);
       store.commit("setDefaultActive", key);
     };
 
@@ -62,11 +62,12 @@ export default {
       handleSelect,
       textColor,
       activeTextColor,
-      defaultActive: computed(() => store.state.user.defaultActive),
+      defaultActive: computed(() => store.state.system.defaultActive),
     };
   },
 };
 </script>
+
 <style lang="less" scoped>
 :deep(.iconfont) {
   margin-right: 5px;

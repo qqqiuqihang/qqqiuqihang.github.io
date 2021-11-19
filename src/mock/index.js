@@ -42,4 +42,5 @@ Mock.mock("/mock/api/system/get", {
       ],
     },
   ],
+  token: "tryittry",
 });

@@ -32,15 +32,18 @@ export default {
     // const listLength = ref(0);
 
     watch(
-      [() => store.state.user.tabbarList, () => store.state.user.defaultActive],
+      [
+        () => store.state.system.tabbarList,
+        () => store.state.system.defaultActive,
+      ],
       () => {
-        active.value = store.state.user.defaultActive;
+        active.value = store.state.system.defaultActive;
       }
     );
 
     return {
       active,
-      tabbarList: computed(() => store.state.user.tabbarList),
+      tabbarList: computed(() => store.state.system.tabbarList),
     };
   },
   components: {},
@@ -52,7 +55,7 @@ export default {
     // tab 选项卡点击事件
     tabClick(tab) {
       if (tab.props.name === this.activeue) return;
-      const router = [...this.$store.state.user.personalConfig.routeList];
+      const router = [...this.$store.state.user.routeList];
       const list = recursiveTraversalResver(router, tab.props.name);
       this.$store.commit("setDefaultActive", tab.props.name);
       this.$store.commit("setBreadcrumbList", list);
@@ -72,7 +75,7 @@ export default {
             }
           }
         });
-        const router = [...this.$store.state.user.personalConfig.routeList];
+        const router = [...this.$store.state.user.routeList];
         const list = recursiveTraversalResver(router, active);
         this.$store.commit("setDefaultActive", active);
         this.$store.commit("setBreadcrumbList", list);

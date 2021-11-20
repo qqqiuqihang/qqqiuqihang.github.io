@@ -1,46 +1,76 @@
 <template>
-  <el-breadcrumb>
+  <!-- <el-breadcrumb>
     <el-breadcrumb-item :to="{ path: '/welcome' }" @click="clickHandler('')">
       首页
     </el-breadcrumb-item>
     <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
-      <!-- @click="clickHandler(item)" -->
       {{ item.name }}
     </el-breadcrumb-item>
-  </el-breadcrumb>
+  </el-breadcrumb> -->
+  <div class="my_breadcrumb">
+    <div class="my_breadcrumb_item">
+      <span
+        class="my_breadcrumb_txet is_link"
+        @click="clickHandler({ val: '', path: '/welcome' })"
+      >
+        首页
+      </span>
+      <!-- <span class="my_breadcrumb_separate">&gt;</span> -->
+    </div>
+    <MyBreadcrumbItem
+      v-if="breadcrumbList && breadcrumbList.length > 1"
+      :list="breadcrumbList"
+    />
+  </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-
+import MyBreadcrumbItem from "./MyBreadcrumbItem.vue";
 export default {
   name: "MyBreadcrumb",
+  props: {
+    breadcrumbList: {
+      type: [Array, String],
+      default: () => [],
+    },
+  },
   data() {
     return {};
   },
-  created() {
-    this.getBreadcrumbList();
-  },
+  components: { MyBreadcrumbItem },
+  created() {},
+
   methods: {
-    ...mapMutations([
-      "setDefaultActive",
-      "getBreadcrumbList",
-      "setBreadcrumbList",
-      "setTabbarListTwo",
-    ]),
     clickHandler(val) {
-      this.setDefaultActive(val);
-      this.setBreadcrumbList(val);
-      this.setTabbarListTwo([]);
+      this.$emit("clickHandler", val);
     },
   },
-  computed: mapState({
-    breadcrumbList: (state) => state.system.breadcrumbList,
-  }),
 };
 </script>
 
 <style lang="less" scoped>
+.my_breadcrumb {
+  display: flex;
+  color: white;
+  font-size: 16px;
+}
+
+.my_breadcrumb_item {
+  .my_breadcrumb_txet {
+    font-weight: 100;
+    &.is_link {
+      font-weight: 700;
+      &:hover {
+        color: #409eff;
+      }
+      cursor: pointer;
+    }
+  }
+  .my_breadcrumb_separate {
+    margin: 0 8px;
+  }
+}
+
 .el-breadcrumb {
   margin-right: 10px;
 }

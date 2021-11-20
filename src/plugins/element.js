@@ -16,6 +16,10 @@ import {
   ElTabs,
   ElTabPane,
   ElIcon,
+  ElMessage,
+  ElDropdown,
+  ElDropdownMenu,
+  ElDropdownItem,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -36,6 +40,9 @@ const components = [
   ElTabs,
   ElTabPane,
   ElIcon,
+  ElDropdown,
+  ElDropdownMenu,
+  ElDropdownItem,
 ];
 
 const plugins = [ElLoading];
@@ -48,4 +55,6 @@ export default (app) => {
   plugins.forEach((plugin) => {
     app.use(plugin);
   });
+
+  app.config.globalProperties.$message = ElMessage;
 };

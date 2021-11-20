@@ -8,7 +8,8 @@ export default {
       personalConfig: {
         layout: "vertical",
         backgroundColor: "",
-        textColor: "",
+        textColor: "#5b80b4",
+        activeTextColor: "#409eff",
       },
       routeList: [],
     };
@@ -17,9 +18,12 @@ export default {
   mutations: {
     // 设置侧边栏菜单
     setRouteList(state, val) {
-      console.log(state);
       state.routeList = val.list;
       state.token = val.token;
+    },
+    // 设置导航栏的文字颜色
+    setStateValue(state, val) {
+      state[val.key] = val.value;
     },
   },
   actions: {

@@ -3,9 +3,20 @@
     <!-- 左边侧边栏 -->
     <el-aside :width="asideWidth + 'px'">
       <!-- 底部首页logo -->
-      <div class="logo" :style="{ height: headerHeight + 'px' }">logo</div>
+      <div class="logo" :style="{ height: headerHeight + 'px' }">
+        <span @click="$router.push('/welcome')" style="cursor: pointer">
+          logo
+        </span>
+      </div>
       <!-- 侧边导航组件 -->
-      <my-aside :isCollapse="isAsideCollapse" :sidebar-list="sidebars" />
+      <my-aside
+        :isCollapse="isAsideCollapse"
+        :sidebar-list="sidebars"
+        :defaultActive="defaultActive"
+        :textColor="textColor"
+        :activeTextColor="activeTextColor"
+        @handleSelect="handleSelect"
+      />
     </el-aside>
     <!-- 右侧 -->
     <el-container class="main_container">
@@ -27,9 +38,12 @@
           <Fold />
         </el-icon>
         <!-- 面包屑导航 -->
-        <MyBreadcrumb />
+        <MyBreadcrumb
+          :breadcrumbList="breadcrumbList"
+          @clickHandler="clickHandler"
+        />
         <!-- 头部组件 -->
-        <my-header />
+        <my-header @logout="logout" />
       </el-header>
       <!-- 主体内容区 -->
       <el-main>
@@ -43,8 +57,8 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
+import { useStore, mapMutations } from "vuex";
 import { Expand, Fold } from "@element-plus/icons";
 import MyBreadcrumb from "./components/MyBreadcrumb.vue";
 import MyHeader from "./components/MyHeader.vue";
@@ -64,9 +78,20 @@ export default {
     const store = useStore();
     store.dispatch("getRouteList");
 
+    onMounted(() => {
+      store.commit("getDefaultActive");
+      store.commit("getBreadcrumbList");
+    });
+
     return {
       sidebars: computed(() => store.state.user?.routeList ?? []),
       tabbarList: computed(() => store.state.system.tabbarList),
+      defaultActive: computed(() => store.state.system.defaultActive),
+      textColor: computed(() => store.state.user.personalConfig.textColor),
+      activeTextColor: computed(
+        () => store.state.user.personalConfig.activeTextColor
+      ),
+      breadcrumbList: computed(() => store.state.system.breadcrumbList),
     };
   },
   created() {},
@@ -76,7 +101,34 @@ export default {
     toggleSideCollapse(val) {
       this.isAsideCollapse = val;
       this.asideWidth = val ? 64 : 200;
+      let value = val ? "#409eff" : "#fff";
+      this.$store.commit("setStateValue", {
+        key: "personalConfig.activeTextColor",
+        value: value,
+      });
     },
+    // 侧边栏导航选中
+    handleSelect(val) {
+      this.$store.dispatch("setDemo", val.keyPath);
+      this.$store.commit("setDefaultActive", val.key);
+    },
+    // 面包屑导航
+    clickHandler(val) {
+      this.setDefaultActive(val.val);
+      this.setBreadcrumbList(val.val);
+      this.setTabbarListTwo([]);
+      this.$router.push(val.path);
+    },
+    // 退出
+    logout() {
+      console.log("哈哈，再见啦");
+      this.$message.success("哈哈，再见啦！！！");
+    },
+    ...mapMutations([
+      "setDefaultActive",
+      "setBreadcrumbList",
+      "setTabbarListTwo",
+    ]),
   },
 };
 </script>

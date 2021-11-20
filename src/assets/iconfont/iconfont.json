@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5829504",
+      "name": "电源",
+      "font_class": "wulumuqishigongandashujuguanlipingtai-ico-",
+      "unicode": "e7eb",
+      "unicode_decimal": 59371
+    },
+    {
+      "icon_id": "20009222",
+      "name": "power电源关闭",
+      "font_class": "powerdianyuanguanbi",
+      "unicode": "e6dc",
+      "unicode_decimal": 59100
+    },
+    {
+      "icon_id": "1135950",
+      "name": "电源",
+      "font_class": "power",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
       "icon_id": "8776784",
       "name": "order",
       "font_class": "icon-test8",

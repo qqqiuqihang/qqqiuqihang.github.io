@@ -4,11 +4,11 @@
       :default-active="defaultActive"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
-      :unique-opened="true"
-      @select="handleSelect"
+      :unique-opened="uniqueOpened"
       :text-color="textColor"
       :active-text-color="activeTextColor"
-      router
+      @select="handleSelect"
+      :router="isRouter"
     >
       <MyAsideItem
         :list="item"
@@ -21,8 +21,6 @@
 
 <script>
 import MyAsideItem from "./MyAsideItem.vue";
-import { watchEffect, ref, computed, onMounted } from "vue";
-import { useStore } from "vuex";
 export default {
   name: "MyAside",
   props: {
@@ -30,9 +28,29 @@ export default {
       type: Array,
       default: () => [],
     },
+    defaultActive: {
+      type: String,
+      default: "",
+    },
+    textColor: {
+      type: String,
+      default: "#5b80b4",
+    },
+    activeTextColor: {
+      type: String,
+      default: "#ffffff",
+    },
     isCollapse: {
       type: Boolean,
       default: false,
+    },
+    uniqueOpened: {
+      type: Boolean,
+      default: true,
+    },
+    isRouter: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -40,30 +58,12 @@ export default {
   },
   components: { MyAsideItem },
   mounted() {},
-  setup(props) {
-    const store = useStore();
-
+  setup(props, { emit }) {
     const handleSelect = (key, keyPath) => {
-      store.dispatch("setDemo", keyPath);
-      store.commit("setDefaultActive", key);
+      emit("handleSelect", { key, keyPath });
     };
 
-    const textColor = ref("#5b80b4");
-    const activeTextColor = ref("#fff");
-    watchEffect(() => {
-      activeTextColor.value = props.isCollapse ? "#409EFF" : "#fff";
-    });
-
-    onMounted(() => {
-      store.commit("getDefaultActive");
-    });
-
-    return {
-      handleSelect,
-      textColor,
-      activeTextColor,
-      defaultActive: computed(() => store.state.system.defaultActive),
-    };
+    return { handleSelect };
   },
 };
 </script>

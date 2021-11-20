@@ -101,9 +101,9 @@ export default {
     toggleSideCollapse(val) {
       this.isAsideCollapse = val;
       this.asideWidth = val ? 64 : 200;
-      let value = val ? "#409eff" : "#fff";
+      const value = val ? "#409eff" : "#fff";
       this.$store.commit("setStateValue", {
-        key: "personalConfig.activeTextColor",
+        key: "activeTextColor",
         value: value,
       });
     },

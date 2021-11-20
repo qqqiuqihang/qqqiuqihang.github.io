@@ -23,7 +23,7 @@ export default {
     },
     // 设置导航栏的文字颜色
     setStateValue(state, val) {
-      state[val.key] = val.value;
+      state.personalConfig[val.key] = val.value;
     },
   },
   actions: {

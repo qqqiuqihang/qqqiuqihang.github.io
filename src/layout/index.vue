@@ -4,7 +4,10 @@
     <el-aside :width="asideWidth + 'px'">
       <!-- 底部首页logo -->
       <div class="logo" :style="{ height: headerHeight + 'px' }">
-        <span @click="$router.push('/welcome')" style="cursor: pointer">
+        <span
+          @click="clickHandler({ path: '/welcome', val: '' })"
+          style="cursor: pointer"
+        >
           logo
         </span>
       </div>

@@ -10,7 +10,6 @@ import "./mock";
 
 // 导入初始化和全局样式
 import "./assets/css/global.css";
-import "./assets/css/initStyle.css";
 // 引入字体图标
 import "./assets/iconfont/iconfont.css";
 

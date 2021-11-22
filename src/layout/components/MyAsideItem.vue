@@ -1,5 +1,9 @@
 <template>
-  <el-sub-menu :index="list.path" v-if="isHaveChildren(list)">
+  <el-sub-menu
+    popper-class="sidebar-popup"
+    :index="list.path"
+    v-if="isHaveChildren(list)"
+  >
     <template #title>
       <i class="iconfont" :class="`icon-icon-${list.icon}`"></i>
       <span>{{ list.name }}</span>

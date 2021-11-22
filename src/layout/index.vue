@@ -157,7 +157,7 @@ export default {
 
   .isCollapseIcon {
     color: #fff;
-    font-size: 30px;
+    font-size: 26px;
     transform: translateX(-18px);
     cursor: pointer;
   }

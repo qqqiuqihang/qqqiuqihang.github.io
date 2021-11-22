@@ -69,11 +69,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-:deep(.iconfont) {
-  margin-right: 5px;
-  // color: #fff;
-}
-
 .el-scrollbar {
   height: calc(100% - 50px);
 }
@@ -87,8 +82,13 @@ export default {
   background-color: #2a395b !important;
 }
 
-.el-menu {
+:deep(.el-menu) {
   border-right: none;
+
+  .iconfont {
+    margin-right: 5px;
+    // color: #fff;
+  }
 
   :deep(.el-menu-item) {
     outline: 0;

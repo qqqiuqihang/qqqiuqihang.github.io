@@ -52,7 +52,7 @@ export default {
 .my_breadcrumb {
   display: flex;
   color: white;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .my_breadcrumb_item {

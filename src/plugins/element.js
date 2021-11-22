@@ -20,6 +20,7 @@ import {
   ElDropdown,
   ElDropdownMenu,
   ElDropdownItem,
+  ElAvatar,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -43,6 +44,7 @@ const components = [
   ElDropdown,
   ElDropdownMenu,
   ElDropdownItem,
+  ElAvatar,
 ];
 
 const plugins = [ElLoading];

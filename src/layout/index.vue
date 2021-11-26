@@ -170,5 +170,35 @@ export default {
   .main_container {
     height: calc(100%);
   }
+  :deep(.el-main) {
+    background-color: #f0f2f5;
+    padding: 0;
+    .el-tabs__header {
+      background-color: #fff;
+    }
+    .my-main-container {
+      overflow: hidden;
+      overflow-y: scroll;
+      margin: 0 20px 20px;
+      width: calc(100% - 40px);
+      height: calc(100% - 56px - 20px);
+
+      background-color: #fff;
+      box-sizing: border-box;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #d0d3d7;
+        &:hover {
+          background-color: #bdbfc4;
+        }
+      }
+    }
+  }
 }
 </style>

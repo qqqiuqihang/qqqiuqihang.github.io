@@ -1,10 +1,12 @@
 <template>
-  <div class="importExcel_container">
-    <div>
-      <span>I'm import EXCEL</span>
-    </div>
-    <div>
-      <el-button @click="toExport">点击导出</el-button>
+  <div class="my-main-container">
+    <div class="importExcel_container">
+      <div>
+        <span>I'm import EXCEL</span>
+      </div>
+      <div>
+        <el-button @click="toExport">点击导出</el-button>
+      </div>
     </div>
   </div>
 </template>

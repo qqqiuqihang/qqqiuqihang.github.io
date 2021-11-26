@@ -1,6 +1,8 @@
 <template>
-  <div class="link-container">
-    <span>I'm link</span>
+  <div class="my-main-container">
+    <div class="link-container">
+      <span>I'm link</span>
+    </div>
   </div>
 </template>
 

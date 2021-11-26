@@ -1,6 +1,8 @@
 <template>
-  <div class="person-container">
-    <span>I'm person</span>
+  <div class="my-main-container">
+    <div class="person-container">
+      <span>I'm person</span>
+    </div>
   </div>
 </template>
 

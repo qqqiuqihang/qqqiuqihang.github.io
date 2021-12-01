@@ -143,6 +143,7 @@ export default {
     setTableArray(val) {
       this.tableData = [...val];
       this.tableHeader = Object.keys(val[0]);
+      this.dialogVisible = false;
     },
     openTheImport() {
       this.dialogVisible = true;

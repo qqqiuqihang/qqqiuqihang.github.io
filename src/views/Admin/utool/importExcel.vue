@@ -177,6 +177,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@mybordercolor: #333; //定义变量作为样式属性值使用
+
 .my-main-container {
   .importWrap {
     margin: 20px;
@@ -184,23 +186,23 @@ export default {
   :deep(.el-table) {
     margin: 20px 20px 0;
     width: 50%;
-    border-color: #333;
+    border-color: @mybordercolor;
     &::before,
     &::after {
-      width: 0;
+      background-color: @mybordercolor;
     }
 
     // .rowTableStyle {
     //   border-color: #096;
     // }
     .cellTableStyle {
-      border-color: #333;
+      border-color: @mybordercolor;
     }
     // .rowHeaderTableStyle {
     //   border-color: #096;
     // }
     .cellHeaderTableStyle {
-      border-color: #333;
+      border-color: @mybordercolor;
       background-color: #444;
     }
   }

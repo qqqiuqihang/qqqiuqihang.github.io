@@ -171,7 +171,7 @@ export default {
     height: calc(100%);
   }
   :deep(.el-main) {
-    background-color: #f0f2f5;
+    background-color: #ededed;
     padding: 0;
     .el-tabs__header {
       background-color: #fff;
@@ -180,9 +180,10 @@ export default {
       overflow: hidden;
       overflow-y: scroll;
       margin: 0 20px 20px;
+      padding: 20px;
       width: calc(100% - 40px);
       height: calc(100% - 56px - 20px);
-
+      border-radius: 10px;
       background-color: #fff;
       box-sizing: border-box;
 

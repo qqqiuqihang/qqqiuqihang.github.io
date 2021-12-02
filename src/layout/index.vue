@@ -50,15 +50,11 @@
       </el-header>
       <!-- 主体内容区 -->
       <el-main>
-        <!-- <transition name="slid-down"> -->
         <!-- tab 动态切换组件 -->
         <my-tabs v-show="tabbarList && tabbarList.length > 0" />
-        <!-- </transition> -->
         <!-- 二级路由页面 -->
         <router-view v-slot="{ Component }">
-          <!-- <transition name="slide-fade"> -->
           <component :is="Component" />
-          <!-- </transition> -->
         </router-view>
       </el-main>
     </el-container>
@@ -207,35 +203,5 @@ export default {
       }
     }
   }
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
-.slid-down-enter-active,
-.slid-down-leave-active {
-  transition: height 0.5s;
-}
-.slid-down-enter,
-.slid-down-leave-to {
-  height: 0;
-}
-
-/* 可以设置不同的进入和离开动画 */
-/* 设置持续时间和动画函数 */
-.slide-fade-enter-active {
-  transition: all 0.6s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
 }
 </style>

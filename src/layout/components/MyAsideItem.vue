@@ -57,4 +57,8 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+// .el-menu-item:hover {
+//   background-color: #2a395b;
+// }
+</style>

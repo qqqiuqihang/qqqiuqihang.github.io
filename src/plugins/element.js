@@ -25,6 +25,7 @@ import {
   ElTable,
   ElTableColumn,
   ElDialog,
+  ElCard,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -53,6 +54,7 @@ const components = [
   ElTable,
   ElTableColumn,
   ElDialog,
+  ElCard,
 ];
 
 const plugins = [ElLoading];

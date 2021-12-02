@@ -28,42 +28,41 @@
         :key="index"
       />
     </el-table>
+    <!-- 弹出框 -->
+    <el-dialog
+      v-model="dialogVisible"
+      title="上传文件"
+      width="570px"
+      :before-close="handleClose"
+    >
+      <div class="uploadFileWrap">
+        <el-upload
+          class="upload-demo"
+          ref="uploadFile"
+          drag
+          action="#"
+          accept=".xls,.xlsx"
+          :auto-upload="false"
+          :multiple="false"
+          :on-change="onFileChange"
+        >
+          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+          <div class="el-upload__text">
+            拖拽文件到这里或者<em>点击选择文件</em>
+          </div>
+          <template #tip>
+            <div class="el-upload__tip">.xls,.xlsx文件且大小不超过500kb</div>
+          </template>
+        </el-upload>
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="beTrueImport">确 认</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
-
-  <!-- 弹出框 -->
-  <el-dialog
-    v-model="dialogVisible"
-    title="上传文件"
-    width="570px"
-    :before-close="handleClose"
-  >
-    <div class="uploadFileWrap">
-      <el-upload
-        class="upload-demo"
-        ref="uploadFile"
-        drag
-        action="#"
-        accept=".xls,.xlsx"
-        :auto-upload="false"
-        :multiple="false"
-        :on-change="onFileChange"
-      >
-        <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-        <div class="el-upload__text">
-          拖拽文件到这里或者<em>点击选择文件</em>
-        </div>
-        <template #tip>
-          <div class="el-upload__tip">.xls,.xlsx文件且大小不超过500kb</div>
-        </template>
-      </el-upload>
-    </div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="beTrueImport">确 认</el-button>
-      </span>
-    </template>
-  </el-dialog>
 </template>
 
 <script>

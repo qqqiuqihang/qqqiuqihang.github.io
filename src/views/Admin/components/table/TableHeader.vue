@@ -1,15 +1,10 @@
 <template>
-  <div class="my-main-container">
-    <div class="workflow_wrap">
-      <div class="header">header</div>
-      <div class="contant">contant</div>
-    </div>
-  </div>
+  <div class="TableHeader-container"></div>
 </template>
 
 <script>
 export default {
-  name: "workflow",
+  name: "TableHeader",
   data() {
     return {};
   },

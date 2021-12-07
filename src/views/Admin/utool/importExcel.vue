@@ -250,13 +250,17 @@ export default {
     }
   }
 }
-.upload-demo {
+:deep(.upload-demo) {
   margin-top: 20px;
   text-align: left;
-  .el-upload-dragger .el-icon--upload {
-    font-size: 67px;
-    margin: 40px 0 16px;
-    line-height: 50px;
+  .el-upload-dragger {
+    width: 300px;
+    height: 150px;
+    .el-icon--upload {
+      font-size: 50px;
+      margin: 30px 0 16px;
+      line-height: 45px;
+    }
   }
 }
 </style>

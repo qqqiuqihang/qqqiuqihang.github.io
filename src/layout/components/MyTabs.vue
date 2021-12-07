@@ -87,4 +87,8 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.el-tabs {
+  transition: height 0.5s linear;
+}
+</style>

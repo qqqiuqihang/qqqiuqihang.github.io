@@ -50,8 +50,8 @@
       </el-header>
       <!-- 主体内容区 -->
       <el-main>
-        <!-- tab 动态切换组件 -->
-        <my-tabs v-show="tabbarList && tabbarList.length > 0" />
+        <!-- tab 动态切换组件  v-show="tabbarList && tabbarList.length > 0" -->
+        <my-tabs ref="myTabs" />
         <!-- 二级路由页面 -->
         <router-view v-slot="{ Component }">
           <component :is="Component" />
@@ -126,8 +126,9 @@ export default {
     },
     // 退出
     logout() {
-      console.log("哈哈，再见啦");
+      // console.log("哈哈，再见啦");
       this.$message.success("哈哈，再见啦！！！");
+      this.clickHandler({ path: "/", val: "" });
     },
     ...mapMutations([
       "setDefaultActive",
@@ -177,14 +178,15 @@ export default {
     padding: 0;
     .el-tabs__header {
       background-color: #fff;
+      margin: 0;
     }
     .my-main-container {
       overflow: hidden;
       overflow-y: scroll;
-      margin: 0 20px 20px;
+      margin: 20px;
       padding: 20px;
       width: calc(100% - 40px);
-      height: calc(100% - 56px - 20px);
+      height: calc(100% - 41px - 40px);
       border-radius: 10px;
       background-color: #fff;
       box-sizing: border-box;
@@ -203,5 +205,19 @@ export default {
       }
     }
   }
+}
+
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

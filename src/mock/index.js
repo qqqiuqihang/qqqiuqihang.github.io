@@ -8,36 +8,48 @@ Mock.mock("/mock/api/system/get", {
     {
       name: "工具类",
       path: "/utool",
-      icon: "test8",
+      icon: "gongju1",
       children: [
         {
           name: "EXCEL 导入",
           path: "/utool/importexcel",
-          icon: "test12",
+          icon: "daochudaoru",
         },
       ],
     },
     {
       name: "链接类",
       path: "/link",
-      icon: "test8",
+      icon: "lianjie2",
       children: [
         {
           name: "第三方",
           path: "/link/link",
-          icon: "test12",
+          icon: "lianjie1",
         },
       ],
     },
     {
       name: "管理类",
       path: "/manage",
-      icon: "test8",
+      icon: "guanli",
       children: [
         {
           name: "人员",
           path: "/manage/person",
-          icon: "test12",
+          icon: "renyuanxinxi",
+        },
+      ],
+    },
+    {
+      name: "流程管理",
+      path: "/workflow",
+      icon: "liuchengmenhu",
+      children: [
+        {
+          name: "流程信息",
+          path: "/workflow/index",
+          icon: "flow-line",
         },
       ],
     },

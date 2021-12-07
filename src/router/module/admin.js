@@ -26,8 +26,14 @@ export default {
     {
       path: "/manage/person",
       name: "Personal",
-      meta: { title: "后台管理——管理" },
+      meta: { title: "后台管理——人员管理" },
       component: () => import("@/views/Admin/manage/person.vue"),
+    },
+    {
+      path: "/workflow/index",
+      name: "WorkFlow",
+      meta: { title: "后台管理——流程管理" },
+      component: () => import("@/views/Admin/workflow/index.vue"),
     },
   ],
 };

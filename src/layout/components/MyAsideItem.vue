@@ -5,7 +5,7 @@
     v-if="isHaveChildren(list)"
   >
     <template #title>
-      <i class="iconfont" :class="`icon-icon-${list.icon}`"></i>
+      <i class="iconfont" :class="`icon-${list.icon}`"></i>
       <span>{{ list.name }}</span>
     </template>
     <MyAsideItem
@@ -21,7 +21,7 @@
     @click="togoTarget($event, list)"
   >
     <!--  -->
-    <i class="iconfont" :class="`icon-icon-${list.icon}`"></i>
+    <i class="iconfont" :class="`icon-${list.icon}`"></i>
     <span>{{ list.name }}</span>
   </el-menu-item>
 </template>

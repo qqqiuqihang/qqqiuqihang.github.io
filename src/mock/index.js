@@ -15,6 +15,11 @@ Mock.mock("/mock/api/system/get", {
           path: "/utool/importexcel",
           icon: "daochudaoru",
         },
+        {
+          name: "Word 导出",
+          path: "/utool/importword",
+          icon: "icon-test18",
+        },
       ],
     },
     {

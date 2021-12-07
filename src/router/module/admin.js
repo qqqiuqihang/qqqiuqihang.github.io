@@ -18,6 +18,12 @@ export default {
       component: () => import("@/views/Admin/utool/importExcel.vue"),
     },
     {
+      path: "/utool/importword",
+      name: "importWord",
+      meta: { title: "后台管理——导入WORD" },
+      component: () => import("@/views/Admin/utool/importWord.vue"),
+    },
+    {
       path: "/link/link",
       name: "Link",
       meta: { title: "后台管理——链接管理" },

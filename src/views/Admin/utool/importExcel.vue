@@ -1,33 +1,56 @@
 <template>
   <div class="my-main-container">
     <div class="importWrap">
-      <el-button type="primary" @click="openTheImport">点击导入</el-button>
-      <el-button
-        type="primary"
-        @click="toExport(tableData, tableHeader)"
-        style="margin-left: 10px"
-      >
-        点击导出
-      </el-button>
+      <div class="left">
+        <el-button type="primary" @click="openTheImport">点击导入</el-button>
+        <el-button
+          type="primary"
+          @click="toExport(tableData, tableHeader)"
+          style="margin-left: 10px"
+        >
+          点击导出
+        </el-button>
+        <el-upload
+          class="upload-demo"
+          ref="uploadFile"
+          drag
+          action="#"
+          accept=".xls,.xlsx"
+          :auto-upload="false"
+          :multiple="false"
+          :show-file-list="false"
+          :on-change="onFileChangeCopy"
+        >
+          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+          <div class="el-upload__text">
+            拖拽文件到这里或者<em>点击选择文件</em>
+          </div>
+          <template #tip>
+            <div class="el-upload__tip">.xls,.xlsx文件且大小不超过500kb</div>
+          </template>
+        </el-upload>
+      </div>
+      <div class="right">
+        <el-table
+          :data="tableData"
+          border
+          row-class-name="rowTableStyle"
+          cell-class-name="cellTableStyle"
+          header-row-class-name="rowHeaderTableStyle"
+          header-cell-class-name="cellHeaderTableStyle"
+          :cell-style="tableCellStyle"
+          :header-cell-style="tableHeaderCellStyle"
+        >
+          <el-table-column type="index" label="序号" />
+          <el-table-column
+            :prop="item"
+            :label="item"
+            v-for="(item, index) in tableHeader"
+            :key="index"
+          />
+        </el-table>
+      </div>
     </div>
-    <el-table
-      :data="tableData"
-      border
-      row-class-name="rowTableStyle"
-      cell-class-name="cellTableStyle"
-      header-row-class-name="rowHeaderTableStyle"
-      header-cell-class-name="cellHeaderTableStyle"
-      :cell-style="tableCellStyle"
-      :header-cell-style="tableHeaderCellStyle"
-    >
-      <el-table-column type="index" label="序号" />
-      <el-table-column
-        :prop="item"
-        :label="item"
-        v-for="(item, index) in tableHeader"
-        :key="index"
-      />
-    </el-table>
     <!-- 弹出框 -->
     <el-dialog
       v-model="dialogVisible"
@@ -104,12 +127,17 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    beTrueImport() {
+    beTrueImport(fileNamedData) {
       const _self = this;
-      const uploadFile = this.$refs.uploadFile.uploadFiles;
+      let uploadFile;
+      if (fileNamedData) {
+        uploadFile = fileNamedData;
+      } else {
+        uploadFile = this.$refs.uploadFile.uploadFiles[0];
+      }
       // 获取上传的文件对象
       // const { raw: files } = uploadFile[0];
-      const files = uploadFile[0].raw;
+      const files = uploadFile.raw;
       // 通过FileReader对象读取文件
       const fileReader = new FileReader();
       fileReader.onload = (event) => {
@@ -164,6 +192,10 @@ export default {
       this.$refs.uploadFile.uploadFiles = [];
       this.$refs.uploadFile.uploadFiles.push(file);
     },
+    onFileChangeCopy(file) {
+      this.$refs.uploadFile.uploadFiles = [];
+      this.beTrueImport(file);
+    },
     // 修改 table cell边框的背景色
     tableCellStyle() {
       // return "border-color: #868686;";
@@ -181,10 +213,22 @@ export default {
 .my-main-container {
   .importWrap {
     margin: 20px;
+    & > div {
+      display: inline-block;
+    }
+    .left {
+      width: 25%;
+    }
+    .right {
+      width: 75%;
+      padding-left: 20px;
+      vertical-align: top;
+      box-sizing: border-box;
+    }
   }
   :deep(.el-table) {
     margin: 20px 20px 0;
-    width: 50%;
+    width: 100%;
     border-color: @mybordercolor;
     &::before,
     &::after {
@@ -206,14 +250,13 @@ export default {
     }
   }
 }
-.el-dialog {
-  .upload-demo {
-    text-align: center;
-    .el-upload-dragger .el-icon--upload {
-      font-size: 67px;
-      margin: 40px 0 16px;
-      line-height: 50px;
-    }
+.upload-demo {
+  margin-top: 20px;
+  text-align: left;
+  .el-upload-dragger .el-icon--upload {
+    font-size: 67px;
+    margin: 40px 0 16px;
+    line-height: 50px;
   }
 }
 </style>

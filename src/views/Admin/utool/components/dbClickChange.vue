@@ -4,7 +4,13 @@
     <span @dblclick="dblclick">{{ item.value }}</span>
   </div>
   <div v-show="!flag">
-    <input ref="input" type="text" v-model="value" @blur="blurInput" />
+    <input
+      class="input_temporary"
+      ref="input"
+      type="text"
+      v-model="value"
+      @blur="blurInput"
+    />
   </div>
 </template>
 
@@ -16,7 +22,12 @@ export default {
       type: Object,
       default: () => {},
     },
+    index: {
+      type: Number,
+      default: 0,
+    },
   },
+  emits: ["change"],
   data() {
     return {
       flag: true,
@@ -27,34 +38,29 @@ export default {
   mounted() {},
   methods: {
     dblclick() {
-      // console.log("我被双击了", e.target, item, index);
-      // const currentElement = e.srcElement;
-      // const parentElement = currentElement.parentNode;
-      // const el = document.createElement("input");
-      // el.className = "temporaryInput";
-      // el.type = "text";
-      // el.value = item.value;
-      // parentElement.replaceChild(el, currentElement);
-      // el.addEventListener("blur", this.blurInput);
-      // el.focus();
+      this.value = this.item.value;
+      this.flag = false;
       this.$nextTick(() => {
-        console.log("我被双击了", this.$refs.input);
-        this.flag = false;
-        // this.$refs.input.focus();
+        this.$refs.input.focus();
       });
     },
 
     blurInput() {
-      // console.log("失去焦点", e, e.srcElement.value);
-      // const parentElement = e.srcElement.parentNode;
-      // const el = document.createElement("span");
-      // el.innerHTML = e.srcElement.value;
-      // parentElement.replaceChild(el, e.srcElement);
-
-      console.log("失去焦点");
       this.flag = true;
+      this.$emit("change", {
+        ...this.item,
+        value: this.value,
+        index: this.index,
+      });
     },
   },
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.input_temporary {
+  // border: none;
+  // outline: none;
+  width: 100%;
+  min-width: 50px;
+}
+</style>

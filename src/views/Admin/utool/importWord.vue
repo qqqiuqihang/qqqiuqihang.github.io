@@ -37,9 +37,7 @@
           <!-- <el-icon><user /></el-icon> -->
           {{ item.label }}
         </template>
-        <DbClickChange :item="item" />
-        <!-- <span v-if="item.tag"></span>
-        <span @dblclick="dblclick($event, item, index)">{{ item.value }}</span> -->
+        <DbClickChange :item="item" :index="index" @change="itemChange" />
       </el-descriptions-item>
     </el-descriptions>
   </div>
@@ -74,6 +72,10 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    itemChange(item) {
+      console.log(item);
+      this.formLists[item.index].value = item.value;
+    },
     handleChange(value) {
       console.log(value);
     },

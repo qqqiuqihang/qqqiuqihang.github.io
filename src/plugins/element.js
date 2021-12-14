@@ -29,8 +29,14 @@ import {
   ElForm,
   ElFormItem,
   ElInput,
+  ElInputNumber,
   ElOption,
   ElSelect,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElTag,
+  ElRadio,
+  ElRadioGroup,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -63,8 +69,14 @@ const components = [
   ElForm,
   ElFormItem,
   ElInput,
+  ElInputNumber,
   ElOption,
   ElSelect,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElTag,
+  ElRadio,
+  ElRadioGroup,
 ];
 
 const plugins = [ElLoading];

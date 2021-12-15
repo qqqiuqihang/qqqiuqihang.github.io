@@ -81,7 +81,7 @@ export default {
   components: { MyHeader, MyAside, MyTabs, MyBreadcrumb, Expand, Fold },
   setup() {
     const store = useStore();
-    store.dispatch("getRouteList");
+    // store.dispatch("getRouteList");
 
     onMounted(() => {
       store.commit("getDefaultActive");

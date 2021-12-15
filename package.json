@@ -38,6 +38,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-cli-plugin-element-plus": "0.0.13"
   }
 }

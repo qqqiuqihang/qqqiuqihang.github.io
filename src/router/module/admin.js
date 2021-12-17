@@ -41,5 +41,11 @@ export default {
       meta: { title: "后台管理——流程管理" },
       component: () => import("@/views/Admin/workflow/index.vue"),
     },
+    {
+      path: "/workflow/workflowDetail",
+      name: "workflowDetail",
+      meta: { title: "后台管理——流程详情" },
+      component: () => import("@/views/Admin/workflow/workflowDetail.vue"),
+    },
   ],
 };

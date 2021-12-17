@@ -1,5 +1,5 @@
 <template>
-  <div v-show="flag">
+  <div v-show="flag" ref="currentBox">
     <span v-if="item.tag"></span>
     <span @dblclick="dblclick">{{ item.value }}</span>
   </div>

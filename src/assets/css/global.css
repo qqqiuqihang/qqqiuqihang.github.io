@@ -13,3 +13,48 @@ body,
   margin-right: 5px;
   /* color: #fff; */
 }
+
+/* .my_table_wrapper .el-table__body-wrapper {
+  position: relative;
+  max-height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+  box-sizing: border-box; 
+} */
+
+/* .my_table_wrapper .el-table__body-wrapper .el-table__body {
+  width: 100% !important;
+} */
+
+.my_table_wrapper .el-table__body-wrapper::-webkit-scrollbar {
+  /* 滚动条整体部分，可以设置宽度啥的 */
+  /* top: 0;
+  right: 0;
+  width: 6px;
+  height: 6px; */
+}
+.my_table_wrapper .el-table__body-wrapper::-webkit-scrollbar-button {
+  /* 滚动条两端的按钮 */
+  /* width: 0; */
+  /* height: 0; */
+}
+.my_table_wrapper .el-table__body-wrapper::-webkit-scrollbar-track {
+  /* 外层轨道 */
+  /* background-color: #000; */
+}
+.my_table_wrapper .el-table__body-wrapper::-webkit-scrollbar-track-piece {
+  /* 内层滚动槽 */
+  /* background-color: #fff; */
+}
+.my_table_wrapper .el-table__body-wrapper::-webkit-scrollbar-thumb {
+  /* 滚动的滑块 */
+  /* background-color: #eee; */
+}
+.my_table_wrapper .el-table__body-wrapper::-webkit-scrollbar-corner {
+  /* 边角 */
+  /* background-color: #fff; */
+}
+.my_table_wrapper .el-table__body-wrapper::-webkit-resizer {
+  /* 定义右下角拖动块的样式 */
+  /* background-color: #fff; */
+}

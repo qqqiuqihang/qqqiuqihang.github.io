@@ -32,6 +32,7 @@
       </div>
       <div class="right">
         <el-table
+          class="my_table_wrapper"
           :data="tableData"
           border
           row-class-name="rowTableStyle"
@@ -145,7 +146,6 @@ export default {
           const { result } = event.target;
           // 以二进制流方式读取得到整份excel表格对象
           const workbook = XLSX.read(result, { type: "binary" });
-          console.log("workbook", workbook);
           let data = []; // 存储获取到的数据
           // 遍历每张工作表进行读取（这里默认只读取第一张表）
           for (const sheet in workbook.Sheets) {
@@ -160,7 +160,7 @@ export default {
           _self.setTableArray(data);
         } catch (e) {
           // 这里可以抛出文件类型错误不正确的相关提示
-          console.log("文件类型不正确");
+          // console.log("文件类型不正确");
           return;
         }
       };

@@ -36,6 +36,11 @@ export default {
           path: "data",
           name: "Data",
         },
+        {
+          title: "地图",
+          path: "map",
+          name: "Map",
+        },
       ],
       title:
         " I am loser, but I never lost hope. Therefore, I have been working silently. ",
@@ -60,7 +65,11 @@ export default {
     },
     // 跳转
     togo(item) {
-      if (item.path === "my" || item.path === "mylayout") {
+      if (
+        item.path === "my" ||
+        item.path === "mylayout" ||
+        item.path === "map"
+      ) {
         this.$router.push(item.name);
       } else {
         this.$message.info("功能开发中！！！");

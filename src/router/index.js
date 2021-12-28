@@ -2,11 +2,13 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import homeRouter from "./module/home";
 import myRouter from "./module/my";
 import adminRouter from "./module/admin";
+import map from "./module/map";
 
 const routes = [
   homeRouter,
   myRouter,
   adminRouter,
+  map,
   {
     path: "/:pathMatch(.*)",
     name: "404",

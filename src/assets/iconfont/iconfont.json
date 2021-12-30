@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "36071",
+      "name": "测量",
+      "font_class": "celiang",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "1263232",
+      "name": "测量",
+      "font_class": "celiang1",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "10989598",
+      "name": "Icon_线段测量",
+      "font_class": "Icon_xianduanceliang",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
+      "icon_id": "15824157",
+      "name": "【视图】测面积",
+      "font_class": "shitucemianji",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "18496206",
+      "name": "测量",
+      "font_class": "celiang2",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
       "icon_id": "77403",
       "name": "链接",
       "font_class": "lianjie",

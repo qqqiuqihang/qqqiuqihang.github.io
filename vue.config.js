@@ -1,5 +1,4 @@
-const serveConfig = require("./configureWebpack/serve.js");
-const buildConfig = require("./configureWebpack/build.js");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   devServer: {
@@ -24,10 +23,27 @@ module.exports = {
   configureWebpack: (config) => {
     if (process.env.NODE_ENV === "production") {
       // 为生产环境修改配置
-      buildConfig(config);
+      config.mode = "production";
+      config.optimization.minimizer = [
+        new UglifyJsPlugin({
+          parallel: 2,
+          uglifyOptions: {
+            compress: {
+              drop_console: true, //console
+              drop_debugger: true,
+              pure_funcs: ["console.log"], //移除console
+            },
+          },
+        }),
+      ];
     } else {
       // 为开发环境修改配置
-      serveConfig(config);
+      config.mode = "development";
     }
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: "javascript/auto",
+    });
   },
 };

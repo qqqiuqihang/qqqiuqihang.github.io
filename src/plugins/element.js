@@ -37,6 +37,7 @@ import {
   ElTag,
   ElRadio,
   ElRadioGroup,
+  ElPagination,
 } from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -77,6 +78,7 @@ const components = [
   ElTag,
   ElRadio,
   ElRadioGroup,
+  ElPagination,
 ];
 
 const plugins = [ElLoading];

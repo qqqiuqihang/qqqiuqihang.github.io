@@ -1,12 +1,11 @@
 <template>
   <div class="my-main-container">
-    <el-form size="mini" inline>
+    <el-form size="small" inline>
       <el-form-item label="尺寸：">
         <el-radio-group v-model="size">
           <el-radio label="">Default</el-radio>
-          <el-radio label="medium">Medium</el-radio>
+          <el-radio label="large">Large</el-radio>
           <el-radio label="small">Small</el-radio>
-          <el-radio label="mini">Mini</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="每行数量：">

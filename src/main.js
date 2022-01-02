@@ -14,8 +14,8 @@ import "./assets/css/initStyle.css";
 import "@arcgis/core/assets/esri/themes/dark/main.css";
 
 // 本地化部署 arcgis
-import esriConfig from "@arcgis/core/config.js";
-esriConfig.assetsPath = "./assets";
+// import esriConfig from "@arcgis/core/config.js";
+// esriConfig.assetsPath = "./assets";
 
 // 引入字体图标
 import "./assets/iconfont/iconfont.css";

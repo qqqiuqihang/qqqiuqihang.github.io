@@ -51,6 +51,16 @@ export default {
               path: "/manage/person",
               icon: "renyuanxinxi",
             },
+            {
+              name: "用户",
+              path: "/manage/user",
+              icon: "renyuanxinxi",
+            },
+            {
+              name: "路由",
+              path: "/manage/routerLists",
+              icon: "renyuanxinxi",
+            },
           ],
         },
         {

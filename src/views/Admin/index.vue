@@ -68,7 +68,7 @@ export default {
   overflow-y: scroll;
   padding: 20px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 1px);
   border-radius: 10px;
   background-color: #efefef;
   box-sizing: border-box;

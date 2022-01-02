@@ -1,5 +1,9 @@
 <template>
-  <div class="user"></div>
+  <div class="my-main-container">
+    <div class="person-container">
+      <span>I'm user</span>
+    </div>
+  </div>
 </template>
 
 <script>

@@ -47,5 +47,17 @@ export default {
       meta: { title: "后台管理——流程详情" },
       component: () => import("@/views/Admin/workflow/workflowDetail.vue"),
     },
+    {
+      path: "/manage/user",
+      name: "User",
+      meta: { title: "系统管理——用户管理" },
+      component: () => import("@/views/Admin/manage/user.vue"),
+    },
+    {
+      path: "/manage/routerLists",
+      name: "RouterLists",
+      meta: { title: "系统管理——用户管理" },
+      component: () => import("@/views/Admin/manage/routerLists.vue"),
+    },
   ],
 };

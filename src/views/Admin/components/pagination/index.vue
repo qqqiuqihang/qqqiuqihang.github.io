@@ -1,5 +1,6 @@
 <template>
   <el-pagination
+    ref="myPagination"
     v-model:currentPage="page.currentPage"
     v-model:page-size="page.pageSize"
     :page-sizes="pageSizes"
@@ -40,16 +41,24 @@ export default {
       pageSize: 10,
     });
 
+    // 每页显示数量的变化
     const handleSizeChange = (val) => {
       console.log(`${val} items per page`);
       emit("pageChange", page);
     };
+
+    // 当前页的变化
     const handleCurrentChange = (val) => {
       console.log(`current page: ${val}`);
       emit("pageChange", page);
     };
 
-    return { page, handleSizeChange, handleCurrentChange };
+    // 重置的分页器
+    const resetPage = () => {
+      page.currentPage = 1;
+    };
+
+    return { page, handleSizeChange, handleCurrentChange, resetPage };
   },
   components: {},
   created() {},
@@ -57,4 +66,11 @@ export default {
   methods: {},
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.el-pagination {
+  justify-content: center;
+  margin-top: 6px;
+  width: 100%;
+  text-align: center;
+}
+</style>

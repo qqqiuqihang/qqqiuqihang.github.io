@@ -107,9 +107,9 @@ export default {
   width: 100%;
   height: 100%;
 
-  :deep(.rowTableStyle) {
-    cursor: pointer;
-  }
+  // :deep(.rowTableStyle) {
+  //   cursor: pointer;
+  // }
   :deep(.rowHeaderTableStyle),
   :deep(.cellHeaderTableStyle) {
     background-color: #444;

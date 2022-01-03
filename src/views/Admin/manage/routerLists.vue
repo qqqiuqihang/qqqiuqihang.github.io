@@ -7,7 +7,7 @@
         </p>
       </div>
     </el-scrollbar>
-    <div class="right">
+    <div class="right" v-if="isSystem">
       <div class="search_wrap">
         <MyTableHeader
           :searchList="searchListSystem"
@@ -20,15 +20,46 @@
       <div class="table_wrap">
         <MyTableBody
           :border="true"
-          :tableData="tableData"
-          :tableHeader="tableFied"
-          :tableOperations="tableOperations"
+          :tableData="table.tableData"
+          :tableHeader="table.tableFied"
+          :tableOperations="table.tableOperations"
           operationsFixed="right"
-          operationswidth="120"
+          operationswidth="145"
           @btnClick="btnClick"
         />
       </div>
-      <MyPagination :total="400" @pageChange="pageChange" />
+      <MyPagination
+        ref="myPagination"
+        :total="table.total"
+        @pageChange="pageChange"
+      />
+    </div>
+    <div class="right" v-else>
+      <div class="search_wrap">
+        <MyTableHeader
+          :searchList="searchListSystem"
+          :btnList="btnListSystem"
+          size="mini"
+          @search="searchEvent"
+          @btnClick="btnClick"
+        />
+      </div>
+      <div class="table_wrap">
+        <MyTableBody
+          :border="true"
+          :tableData="tabless.tableData"
+          :tableHeader="tabless.tableFied"
+          :tableOperations="tabless.tableOperations"
+          operationsFixed="right"
+          operationswidth="145"
+          @btnClick="btnClick"
+        />
+      </div>
+      <MyPagination
+        ref="myPagination"
+        :total="tabless.total"
+        @pageChange="pageChange"
+      />
     </div>
   </div>
 </template>
@@ -59,87 +90,133 @@ export default {
           method: "toggleType",
         },
       ],
-      tableFied: [
-        { type: "selection", label: "", width: "40px", fixed: true },
-        { type: "index", label: "序号", width: "60px", fixed: true },
-        { label: "Date", prop: "date", width: "150" },
-        { label: "Name", prop: "name", width: "120" },
-        { label: "State", prop: "state", width: "120" },
-        { label: "City", prop: "city", width: "120" },
-        { label: "Address", prop: "address", width: "600" },
-        { label: "Zip", prop: "zip", width: "120" },
-      ],
-      tableOperations: [
-        { label: "删除", method: "deleteRow", icon: "" },
-        { label: "删除", method: "deleteRow", icon: "" },
-      ],
-      tableData: [
-        {
-          date: "2016-05-03",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-        {
-          date: "2016-05-02",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-        {
-          date: "2016-05-04",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-        {
-          date: "2016-05-01",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-        {
-          date: "2016-05-08",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-        {
-          date: "2016-05-06",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-        {
-          date: "2016-05-07",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036",
-        },
-      ],
-      formInline: {
-        user: "",
-        region: "",
-      },
-      page: {
-        currentPage: 1,
-        pageSize: 10,
+      table: {
+        tableFied: [
+          { type: "selection", label: "", width: "40px", fixed: true },
+          { type: "index", label: "序号", width: "60px", fixed: true },
+          { label: "Date", prop: "date", width: "150" },
+          { label: "Name", prop: "name", width: "120" },
+          { label: "State", prop: "state", width: "120" },
+          { label: "City", prop: "city", width: "120" },
+          { label: "Address", prop: "address", width: "600" },
+          { label: "Zip", prop: "zip", width: "120" },
+        ],
+        tableOperations: [
+          { label: "修改", method: "editRow", icon: "icon-icon-test13" },
+          { label: "删除", method: "deleteRow", icon: "icon-icon-test44" },
+        ],
+        tableData: [
+          {
+            date: "2016-05-03",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-02",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-04",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-01",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-08",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-06",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-07",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+        ],
         total: 200,
       },
+      tabless: {
+        tableFied: [
+          { type: "selection", label: "", width: "40px", fixed: true },
+          { type: "index", label: "序号", width: "60px", fixed: true },
+          { label: "Date", prop: "date", width: "150" },
+          { label: "Name", prop: "name", width: "120" },
+          { label: "State", prop: "state", width: "120" },
+          { label: "City", prop: "city", width: "120" },
+          { label: "Address", prop: "address", width: "600" },
+          { label: "Zip", prop: "zip", width: "120" },
+        ],
+        tableOperations: [
+          { label: "修改", method: "editRow", icon: "icon-icon-test13" },
+          { label: "删除", method: "deleteRow", icon: "icon-icon-test44" },
+        ],
+        tableData: [
+          {
+            date: "2016-05-03",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-02",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-04",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+          {
+            date: "2016-05-01",
+            name: "Tom",
+            state: "California",
+            city: "Los Angeles",
+            address: "No. 189, Grove St, Los Angeles",
+            zip: "CA 90036",
+          },
+        ],
+        total: 50,
+      },
+      isSystem: true,
     };
   },
   components: { MyTableHeader, MyTableBody, MyPagination },
@@ -148,14 +225,12 @@ export default {
     onSubmit() {
       console.log("submit!");
     },
-    handleSizeChange(val) {
-      console.log(`current page: ${val}`);
-    },
-    handleCurrentChange(val) {
-      console.log(`${val} items per page`);
-    },
     deleteRow(index) {
-      this.tableData.splice(index, 1);
+      this.table.tableData.splice(index, 1);
+    },
+    toggleType() {
+      this.resetPgee();
+      this.isSystem = !this.isSystem;
     },
   },
 };
@@ -199,13 +274,6 @@ export default {
 
     .table_wrap {
       height: calc(100% - 56px - 40px);
-    }
-
-    .el-pagination {
-      justify-content: center;
-      margin-top: 6px;
-      width: 100%;
-      text-align: center;
     }
   }
 }

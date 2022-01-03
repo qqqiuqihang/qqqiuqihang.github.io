@@ -2,51 +2,47 @@
   <el-form
     :inline="true"
     :model="formInline"
-    :size="'small'"
+    :size="size"
     class="demo-form-inline"
   >
+    <slot name="searchBefore"></slot>
     <!-- 搜索框 -->
     <el-form-item
-      label="测试1"
+      :label="item.label"
       v-for="(item, index) in searchList"
       :key="index"
     >
       <!-- 搜索框 -->
       <el-input
-        v-model="formInline.user"
+        v-model="formInline[item.parameter]"
         placeholder="请输入内容"
         v-if="item.type === 'input'"
       >
         <template #append>
-          <el-button><span class="iconfont icon-icon-test12"></span></el-button>
+          <el-button @click="$emit('search', formInline)"
+            ><span class="iconfont icon-icon-test12"></span
+          ></el-button>
         </template>
       </el-input>
       <!-- 下拉 -->
-      <el-select v-model="formInline.region" placeholder="请输入内容">
+      <el-select
+        v-model="formInline.region"
+        placeholder="请输入内容"
+        v-if="item.type === 'select'"
+      >
         <el-option label="测试1" value="shanghai"></el-option>
         <el-option label="测试2" value="beijing"></el-option>
       </el-select>
     </el-form-item>
-    <!-- <el-form-item label="测试2">
-      <el-select v-model="formInline.region" placeholder="请输入内容">
-        <el-option label="测试1" value="shanghai"></el-option>
-        <el-option label="测试2" value="beijing"></el-option>
-      </el-select>
-    </el-form-item> -->
+    <slot name="searchAfter"></slot>
     <!-- 按钮 -->
     <el-form-item v-for="(item, index) in btnList" :key="index">
-      <el-button class="btn" @click="$emit('btnClick', 'add')">
-        <span class="iconfont icon-icon-test30"></span>
-        <span class="">添加</span>
+      <el-button class="btn" @click="$emit('btnClick', item.method)">
+        <span class="iconfont" :class="item.icon"></span>
+        <span class="">{{ item.label }}</span>
       </el-button>
     </el-form-item>
-    <!-- <el-form-item>
-      <el-button class="btn" @click="$emit('btnClick', 'reset')">
-        <el-button class="btn" @click="btnClick('add')">
-        <span class="iconfont icon-icon-test41"></span>
-        <span class="">重置</span>
-      </el-button>
-    </el-form-item> -->
+    <slot name="btnBefore"></slot>
   </el-form>
 </template>
 
@@ -62,16 +58,17 @@ export default {
       type: Array,
       default: () => [],
     },
+    size: {
+      type: String,
+      default: "",
+    },
   },
+  emits: ["search", "btnClick"],
   data() {
     return {
-      formInline: {
-        user: "",
-        region: "",
-      },
+      formInline: {},
     };
   },
-  emits: ["btnClick"],
   components: {},
   created() {},
   mounted() {},

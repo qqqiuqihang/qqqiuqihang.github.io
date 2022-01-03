@@ -8,50 +8,71 @@
       </div>
     </el-scrollbar>
     <div class="right">
-      <el-table
-        header-cell-class-name="cellHeaderTableStyle"
-        header-row-class-name="rowHeaderTableStyle"
-        :data="tableData"
-        height="calc(100% - 40px)"
-        border
-      >
-        <el-table-column fixed prop="date" label="Date" width="150" />
-        <el-table-column prop="name" label="Name" width="120" />
-        <el-table-column prop="state" label="State" width="120" />
-        <el-table-column prop="city" label="City" width="120" />
-        <el-table-column prop="address" label="Address" width="600" />
-        <el-table-column prop="zip" label="Zip" width="120" />
-        <el-table-column fixed="right" label="Operations" width="120">
-          <template #default="scope">
-            <el-button
-              type="text"
-              size="small"
-              @click.prevent="deleteRow(scope.$index)"
-            >
-              Remove
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        v-model:currentPage="page.currentPage"
-        v-model:page-size="page.pageSize"
-        :page-sizes="[10, 100, 200, 300, 400]"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      >
-      </el-pagination>
+      <div class="search_wrap">
+        <MyTableHeader
+          :searchList="searchListSystem"
+          :btnList="btnListSystem"
+          size="mini"
+          @search="searchEvent"
+          @btnClick="btnClick"
+        />
+      </div>
+      <div class="table_wrap">
+        <MyTableBody
+          :border="true"
+          :tableData="tableData"
+          :tableHeader="tableFied"
+          :tableOperations="tableOperations"
+          operationsFixed="right"
+          operationswidth="120"
+          @btnClick="btnClick"
+        />
+      </div>
+      <MyPagination :total="400" @pageChange="pageChange" />
     </div>
   </div>
 </template>
 
 <script>
+import MyTableHeader from "@/views/Admin/components/table/TableHeader.vue";
+import MyTableBody from "@/views/Admin/components/table/TableBody.vue";
+import MyPagination from "@/views/Admin/components/pagination/index.vue";
+
+import mixin from "@/mixin/basemixin";
+
 export default {
   name: "routerLists",
+  mixins: [mixin],
   data() {
     return {
+      searchListSystem: [
+        { type: "input", label: "名称", parameter: "name" },
+        { type: "input", label: "编码", parameter: "code" },
+      ],
+      btnListSystem: [
+        { type: "", label: "新增", icon: "icon-icon-test30", method: "add" },
+        { type: "", label: "重置", icon: "icon-icon-test41", method: "rest" },
+        {
+          type: "",
+          label: "切换至路由",
+          icon: "icon-icon-test41",
+          method: "toggleType",
+        },
+      ],
+      tableFied: [
+        { type: "selection", label: "", width: "40px", fixed: true },
+        { type: "index", label: "序号", width: "60px", fixed: true },
+        { label: "Date", prop: "date", width: "150" },
+        { label: "Name", prop: "name", width: "120" },
+        { label: "State", prop: "state", width: "120" },
+        { label: "City", prop: "city", width: "120" },
+        { label: "Address", prop: "address", width: "600" },
+        { label: "Zip", prop: "zip", width: "120" },
+      ],
+      tableOperations: [
+        { label: "删除", method: "deleteRow", icon: "" },
+        { label: "删除", method: "deleteRow", icon: "" },
+      ],
       tableData: [
         {
           date: "2016-05-03",
@@ -110,6 +131,10 @@ export default {
           zip: "CA 90036",
         },
       ],
+      formInline: {
+        user: "",
+        region: "",
+      },
       page: {
         currentPage: 1,
         pageSize: 10,
@@ -117,7 +142,12 @@ export default {
       },
     };
   },
+  components: { MyTableHeader, MyTableBody, MyPagination },
+  mounted() {},
   methods: {
+    onSubmit() {
+      console.log("submit!");
+    },
     handleSizeChange(val) {
       console.log(`current page: ${val}`);
     },
@@ -162,34 +192,13 @@ export default {
     width: calc(100% - 200px);
     padding: 0 20px;
 
-    .rowHeaderTableStyle,
-    .cellHeaderTableStyle {
-      background-color: #444;
+    .search_wrap {
+      height: 56px;
+      overflow: hidden;
     }
 
-    .el-table__fixed {
-      bottom: 6px !important;
-    }
-    .el-table__fixed-right {
-      right: 6px !important;
-    }
-    .el-table__fixed-right-patch {
-      width: 6px !important;
-    }
-
-    .el-table__body-wrapper {
-      &::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-      }
-      &::-webkit-scrollbar-thumb {
-        background-color: #0003;
-        border-radius: 10px;
-        transition: all 0.2s ease-in-out;
-      }
-      &::-webkit-scrollbar-track {
-        border-radius: 10px;
-      }
+    .table_wrap {
+      height: calc(100% - 56px - 40px);
     }
 
     .el-pagination {

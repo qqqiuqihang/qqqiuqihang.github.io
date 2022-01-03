@@ -1,40 +1,55 @@
 <template>
   <el-pagination
-    v-model:currentPage="currentPage4"
-    :small="false"
-    :background="false"
-    :hide-on-single-page="false"
-    :page-sizes="[100, 200, 300, 400]"
-    :page-size="100"
-    :total="400"
+    v-model:currentPage="page.currentPage"
+    v-model:page-size="page.pageSize"
+    :page-sizes="pageSizes"
     layout="total, sizes, prev, pager, next, jumper"
+    :total="total"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
-    popper-class="popperPagination"
   >
   </el-pagination>
 </template>
 
 <script>
-import { ref } from "vue";
+import { reactive } from "vue";
 export default {
   name: "Pagination",
-  data() {
-    return {};
+  props: {
+    total: {
+      type: Number,
+      default: 0,
+    },
+    pageSizes: {
+      type: Array,
+      default: () => [1, 3, 5, 7, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
+    },
   },
-  setup() {
+  emits: ["pageChange"],
+  data() {
+    return {
+      pagess: {
+        currentPage: 1,
+        pageSize: 10,
+      },
+    };
+  },
+  setup(props, { emit }) {
+    const page = reactive({
+      currentPage: 1,
+      pageSize: 10,
+    });
+
     const handleSizeChange = (val) => {
       console.log(`${val} items per page`);
+      emit("pageChange", page);
     };
     const handleCurrentChange = (val) => {
       console.log(`current page: ${val}`);
+      emit("pageChange", page);
     };
 
-    return {
-      currentPage4: ref(4),
-      handleSizeChange,
-      handleCurrentChange,
-    };
+    return { page, handleSizeChange, handleCurrentChange };
   },
   components: {},
   created() {},

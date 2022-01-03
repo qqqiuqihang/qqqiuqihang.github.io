@@ -77,7 +77,7 @@ export default {
 
       mapView.when((target) => {
         // target 实例对象
-        // console.log(target);
+        console.log(target);
         measurement.clear();
       });
 

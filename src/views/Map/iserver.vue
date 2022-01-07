@@ -46,18 +46,6 @@
       <div class="btn-item" @click="toggleMeasure('clear')">
         <span class="iconfont icon-icon-test1" title="退出测量"></span>
       </div>
-      <!-- <div
-        class="btn-item"
-        @click="toggleMeasure(item.type)"
-        v-for="(item, index) in toolListsMap"
-        :key="index"
-      >
-        <span
-          class="iconfont"
-          :class="[item.icon, active === item.type ? 'active' : '']"
-          :title="item.title"
-        ></span>
-      </div> -->
     </div>
   </div>
 </template>
@@ -66,6 +54,7 @@
 import YXMap from "@/components/Map/YXMap.vue";
 import QueryTask from "@arcgis/core/tasks/QueryTask";
 import Query from "@arcgis/core/tasks/support/Query";
+import WFSLayer from "@arcgis/core/layers/WFSLayer";
 export default {
   name: "IserverMap",
   data() {
@@ -85,8 +74,11 @@ export default {
   mounted() {},
   methods: {
     searchInput() {
+      const map = this.$refs.YXMap.map;
+      const mapView = this.$refs.YXMap.mapView;
+
       let queryTask = new QueryTask({
-        url: "http://10.12.6.90:8090/iserver/services/map-mbtiles-ArcTiler141427yxkml/wmts100",
+        url: "http://10.12.6.90:8090/iserver/services/data-ZJ/wfs200/utf-8",
       });
       let query = new Query();
       query.returnGeometry = true;
@@ -94,14 +86,28 @@ export default {
       query.where = "POP &gt; 1000000"; // Return all cities with a population greater than 1 million
 
       // When resolved, returns features and graphics that satisfy the query.
-      queryTask.execute(query).then(function (results) {
-        console.log(results.features);
-      });
+      queryTask
+        .execute(query)
+        .then(function (results) {
+          console.log(results.features);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
 
       // When resolved, returns a count of the features that satisfy the query.
-      queryTask.executeForCount(query).then(function (results) {
-        console.log(results);
+      queryTask
+        .executeForCount(query)
+        .then(function (results) {
+          console.log(results);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      const layer = new WFSLayer({
+        url: "http://10.12.6.90:8090/iserver/services/data-ZJ/wfs200/utf-8?REQUEST=GetFeature&TypeName=World:Lakes&outputFormat=application/json",
       });
+      map.add(layer);
     },
     toggleMeasure(type) {
       this.active = type;
